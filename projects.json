@@ -1,0 +1,144 @@
+[
+  {
+    "id": "vocaflow",
+    "selected": true,
+    "title": "VocaFlow — Voice AI Agent SaaS Platform",
+    "github": "",
+    "youtube": "",
+    "bullets": [
+      "Designed a multi-tenant platform where users build and deploy AI voice agents across phone, chat, and WhatsApp.",
+      "Built real-time voice agents with knowledge retrieval, data collection, and human handoff at sub-second latency.",
+      "Enabled businesses to offer 24/7 customer engagement without added headcount, handling inquiries, bookings, and support."
+    ],
+    "techStack": "React, FastAPI, Supabase, OpenAI Realtime API, Twilio, Stripe, Redis, Docker, Azure"
+  },
+  {
+    "id": "airline-assistant",
+    "selected": true,
+    "title": "AI Assistant — Airline Customer Service (GenAI Capstone Kaggle × Google)",
+    "github": "https://github.com/RideneFiras/KagglexGoogle",
+    "youtube": "",
+    "bullets": [
+      "Designed a conversational assistant that collects customer information through structured dialogue.",
+      "Reduced repetitive customer support tasks by automating the handling of frequent inquiries.",
+      "Integrated an intelligent search engine to provide contextualized responses from a dedicated knowledge base."
+    ],
+    "techStack": "Python, LangChain, ChromaDB, RAG, Gradio, Gemini"
+  },
+  {
+    "id": "content-automation",
+    "selected": true,
+    "title": "Content Creation Automation Platform",
+    "github": "",
+    "youtube": "",
+    "bullets": [
+      "Built a platform automating research, generation, and publication of Facebook content across objectives.",
+      "Orchestrated specialized agents per source (news, websites, documents) with email validation before publishing.",
+      "Implemented automated comment moderation and intelligent responses based on a knowledge base."
+    ],
+    "techStack": "Python, n8n, MCP, Meta Developer, Tavily, ChromaDB"
+  },
+  {
+    "id": "claude-code-team",
+    "selected": false,
+    "title": "8-Agent Claude Code Development Team",
+    "github": "",
+    "youtube": "",
+    "bullets": [
+      "Built a team of 8 specialized Claude Code agents (PM, Frontend, Backend, AI, DevOps, QA, Test, Docs) coordinated through Notion and GitHub.",
+      "Ran full sprint workflows solo, from backlog planning to PR review and merge.",
+      "Shipped 170+ GitHub issues and 726 automated tests across a ~40,000 line codebase in about 4 weeks."
+    ],
+    "techStack": "Claude Code, Notion MCP, GitHub CLI, Playwright MCP"
+  },
+  {
+    "id": "recruitment-automation",
+    "selected": false,
+    "title": "Recruitment Automation System",
+    "github": "",
+    "youtube": "",
+    "bullets": [
+      "Built four interconnected pipelines covering candidate intake, AI scoring, ATS synchronization, and lead generation.",
+      "Designed scoring logic to extract job requirements once per posting and reuse them across all candidates, cutting redundant processing and manual screening time.",
+      "Synced candidate data automatically across the ATS, kanban board, and public job board, keeping every system up to date in real time."
+    ],
+    "techStack": "n8n, Make, REST APIs, Webhooks, Notion"
+  },
+  {
+    "id": "prospecting-system",
+    "selected": false,
+    "title": "Multi-Agent AI Prospecting System",
+    "github": "",
+    "youtube": "",
+    "bullets": [
+      "Designed a multi-agent system to research, qualify, and analyze prospects, generating strategic reports.",
+      "Built specialized agents for opportunity analysis, competitor research, and personalized outreach generation.",
+      "Reduced manual prospecting time by ~80% and automated report delivery and CRM integration."
+    ],
+    "techStack": "CrewAI, LangChain, FastAPI, Latenode"
+  },
+  {
+    "id": "pedagogia",
+    "selected": false,
+    "title": "Pedagog'IA — AI Platform for Teachers",
+    "github": "https://github.com/RideneFiras/PedagogIA",
+    "youtube": "",
+    "bullets": [
+      "Built a social platform for Tunisian teachers to share resources, combined with an AI feature generating fiches, quizzes, and exercises.",
+      "Implemented an AI credits system, admin panel, and full social feed feature set.",
+      "Designed the AI generation flow around subject, level, and chapter inputs for fast lesson prep."
+    ],
+    "techStack": "Next.js, FastAPI, Supabase, pgvector, GitHub Models (gpt-4o-mini)"
+  },
+  {
+    "id": "5g-throughput",
+    "selected": false,
+    "title": "5G Throughput Prediction (MLOps)",
+    "github": "https://github.com/RideneFiras/QosMLOPS",
+    "youtube": "",
+    "bullets": [
+      "Built a full MLOps pipeline predicting 5G network throughput, comparing 300+ models via Azure ML.",
+      "Added explainability with SHAP and GPT-4o to make model decisions interpretable for non-technical stakeholders.",
+      "Deployed the pipeline in Docker with monitoring through Elasticsearch and Kibana."
+    ],
+    "techStack": "Azure ML, FastAPI, Docker, Elasticsearch, Kibana, SHAP, MLflow, GitHub Actions"
+  },
+  {
+    "id": "anomaly-detection",
+    "selected": false,
+    "title": "AI Anomaly Detection for Industrial Screws",
+    "github": "https://github.com/RideneFiras/Anomaly_detection",
+    "youtube": "",
+    "bullets": [
+      "Built a CNN autoencoder trained only on defect-free images to flag visual defects through reconstruction error.",
+      "Delivered real-time inspection with confidence scoring for production line use.",
+      "Reduced manual inspection time by 70%."
+    ],
+    "techStack": "TensorFlow, FastAPI, OpenCV, TailwindCSS"
+  },
+  {
+    "id": "tt-assistant",
+    "selected": false,
+    "title": "TT Assistant — Multilingual Chatbot (CSR Hackathon)",
+    "github": "https://github.com/RideneFiras/ChatbotTT",
+    "youtube": "",
+    "bullets": [
+      "Built an inclusive multilingual chatbot for Tunisie Telecom supporting Arabic, French, English, and Tunisian dialect.",
+      "Enabled both voice and text interaction using Whisper for speech and GPT-4o for responses.",
+      "Won 3rd place at the AI for CSR Hackathon."
+    ],
+    "techStack": "GPT-4o, Whisper, LangChain, FastAPI, n8n, Telegram"
+  },
+  {
+    "id": "odoo-integrations",
+    "selected": false,
+    "title": "Odoo Integrations",
+    "github": "",
+    "youtube": "",
+    "bullets": [
+      "Integrated Odoo CRM into a multi-agent AI prospecting system for automated lead and pipeline updates.",
+      "Built a facial recognition attendance system integrated with Odoo's attendance module."
+    ],
+    "techStack": "Odoo, Python, OpenCV"
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "la1",
+    "name": "Arabic",
+    "level": "Native"
+  },
+  {
+    "id": "la2",
+    "name": "English",
+    "level": "Fluent"
+  },
+  {
+    "id": "la3",
+    "name": "French",
+    "level": "Fluent"
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "edu1",
+    "institution": "Esprit: School of Engineering",
+    "location": "Tunis, Tunisia",
+    "degree": "Engineering Degree in Computer Science",
+    "dateRange": "2023 – Present"
+  },
+  {
+    "id": "edu2",
+    "institution": "Integrated Preparatory Cycle",
+    "location": "Esprit Tunis",
+    "degree": "Mathematics & Physics",
+    "dateRange": "2020 – 2023"
+  }
+]
