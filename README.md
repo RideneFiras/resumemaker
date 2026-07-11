@@ -25,15 +25,15 @@ So I built this. It's a single HTML file that runs entirely in the browser: a sm
 
 ## How to use it
 
-1. Open `resume_dashboard.html` in any browser. That's it, no server needed.
+1. Open `resume_dashboard1.html` in any browser. That's it, no server needed.
 2. Edit your data on the left panel.
 3. Watch the resume update live on the right.
 4. Hit **Print / Save as PDF** when it looks right.
 
 ## Files
 
-- `resume_dashboard.html` — the whole tool (dashboard + live resume + print logic) in one file.
-- `profile.json`, `education.json`, `experience.json`, `projects.json`, `skills.json`, `associations.json`, `languages.json` — the default data for each section, and also what you get when you use the per-section export button. Handy as a backup or if you'd rather edit the data by hand.
+- `resume_dashboard1.html` — the whole tool (dashboard + live resume + print logic) in one file.
+- `profile.json`, `education.json`, `experience.json`, `projects.json`, `certifications.json`, `skills.json`, `associations.json`, `languages.json` — the default data for each section, and also what you get when you use the per-section export button. Handy as a backup or if you'd rather edit the data by hand.
 
 ## Notes
 

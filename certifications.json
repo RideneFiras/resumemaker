@@ -1,0 +1,134 @@
+[
+  {
+    "id": "cert1",
+    "selected": false,
+    "name": "AI Security & GenAI Red Teaming",
+    "issuer": "ESPRIT"
+  },
+  {
+    "id": "cert2",
+    "selected": false,
+    "name": "Attendance Hashgraph Developer",
+    "issuer": "Hedera"
+  },
+  {
+    "id": "cert3",
+    "selected": false,
+    "name": "AWS Academy Graduate — Cloud Foundations",
+    "issuer": "Amazon Web Services (AWS)"
+  },
+  {
+    "id": "cert4",
+    "selected": false,
+    "name": "Applications of AI for Anomaly Detection",
+    "issuer": "NVIDIA"
+  },
+  {
+    "id": "cert5",
+    "selected": false,
+    "name": "Building Generative AI-Powered Applications with Python",
+    "issuer": "IBM"
+  },
+  {
+    "id": "cert6",
+    "selected": false,
+    "name": "Multi AI Agent Systems with crewAI",
+    "issuer": "CrewAI"
+  },
+  {
+    "id": "cert7",
+    "selected": false,
+    "name": "Microsoft Azure AI Essentials Professional Certificate",
+    "issuer": "Microsoft"
+  },
+  {
+    "id": "cert8",
+    "selected": false,
+    "name": "Building AI Agents with Multimodal Models",
+    "issuer": "NVIDIA"
+  },
+  {
+    "id": "cert9",
+    "selected": false,
+    "name": "Generative AI with Diffusion Models",
+    "issuer": "NVIDIA"
+  },
+  {
+    "id": "cert10",
+    "selected": false,
+    "name": "Machine Learning in Production",
+    "issuer": "DeepLearning.AI"
+  },
+  {
+    "id": "cert11",
+    "selected": false,
+    "name": "Building LLM Applications With Prompt Engineering",
+    "issuer": "NVIDIA"
+  },
+  {
+    "id": "cert12",
+    "selected": false,
+    "name": "Introduction to Transformer-Based Natural Language Processing",
+    "issuer": "NVIDIA"
+  },
+  {
+    "id": "cert13",
+    "selected": false,
+    "name": "5-Day Gen AI Intensive",
+    "issuer": "Kaggle"
+  },
+  {
+    "id": "cert14",
+    "selected": false,
+    "name": "Building RAG Agents with LLMs",
+    "issuer": "NVIDIA"
+  },
+  {
+    "id": "cert15",
+    "selected": false,
+    "name": "Machine Learning Explainability",
+    "issuer": "Kaggle"
+  },
+  {
+    "id": "cert16",
+    "selected": false,
+    "name": "Fundamentals of Deep Learning",
+    "issuer": "NVIDIA"
+  },
+  {
+    "id": "cert17",
+    "selected": false,
+    "name": "GitHub Foundations",
+    "issuer": "GitHub"
+  },
+  {
+    "id": "cert18",
+    "selected": false,
+    "name": "CCNA: Switching, Routing, and Wireless Essentials",
+    "issuer": "Cisco"
+  },
+  {
+    "id": "cert19",
+    "selected": false,
+    "name": "Hands-on with Explainable AI Tools & Techniques",
+    "issuer": "ESPRIT"
+  },
+  {
+    "id": "cert20",
+    "selected": false,
+    "name": "Artificial Intelligence Fundamentals with Capstone Project",
+    "issuer": "IBM"
+  },
+  {
+    "id": "cert21",
+    "selected": false,
+    "name": "Agentic AI for Enterprise",
+    "issuer": "ESPRIT"
+  },
+  {
+    "id": "cert22",
+    "selected": false,
+    "name": "Data Engineering & MLOps",
+    "issuer": "ESPRIT"
+  }
+]

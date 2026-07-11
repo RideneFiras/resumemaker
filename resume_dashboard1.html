@@ -133,15 +133,15 @@ details.coll .coll-body { padding-top: 8px; }
 
 .form-field { margin-bottom: 8px; }
 .form-field label { display: block; font-size: 10.5px; font-weight: 600; color: #555; margin-bottom: 3px; }
-.form-field input, .form-field textarea {
+.form-field input, .form-field textarea, .form-field select {
   width: 100%; font-family: inherit; font-size: 12px; padding: 6px 8px;
   border: 1px solid #ccc; border-radius: 5px; background: #fff; color: #111;
 }
 .form-field textarea { resize: vertical; min-height: 64px; }
 
-#editForm, #genericForm { display: none; background: #fff; border: 1px solid #e2ded2; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
-#editForm.open, #genericForm.open { display: block; }
-#editForm h3, #genericForm h3 { font-size: 12px; margin-bottom: 10px; color: #111; }
+#editForm, #genericForm, #certForm { display: none; background: #fff; border: 1px solid #e2ded2; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+#editForm.open, #genericForm.open, #certForm.open { display: block; }
+#editForm h3, #genericForm h3, #certForm h3 { font-size: 12px; margin-bottom: 10px; color: #111; }
 
 .status-msg { font-size: 11px; color: var(--accent); margin-top: 8px; min-height: 14px; }
 
@@ -165,7 +165,7 @@ header .contact { position: absolute; top: auto; bottom: 2px; right: 0; width: 1
 .contact a:hover { color: var(--ink); text-decoration: underline; }
 .contact svg { width: 9px; height: 9px; fill: var(--soft); flex-shrink: 0; }
 
-section { margin-top: 6px; }
+section { margin-top: 5px; }
 .sec-title {
   font-family: var(--serif); font-size: 11pt; font-weight: 600; color: var(--ink);
   letter-spacing: 0.03em; padding-bottom: 0; border-bottom: 0.5px solid var(--rule);
@@ -220,7 +220,7 @@ section { margin-top: 6px; }
   .app { display: block; }
   .preview-wrap { padding: 0; display: block; }
   html, body { background: #fff; padding: 0; margin: 0; }
-  .page { box-shadow: none; width: 100%; min-height: 0; height: auto; padding: 0.18in 0.5in 0.22in; margin: 0; }
+  .page { box-shadow: none; width: 100%; min-height: 0; height: auto; padding: 0.14in 0.5in 0.18in; margin: 0; }
   a { color: var(--ink) !important; text-decoration: none !important; }
   section { page-break-inside: avoid; break-inside: avoid; }
   .bottom-row { page-break-inside: avoid; break-inside: avoid; }
@@ -235,6 +235,30 @@ section { margin-top: 6px; }
   <div class="dash no-print">
     <h1>Resume Dashboard</h1>
     <div class="sub">Edit your data, pick projects, then print → save as PDF.</div>
+
+    <!-- TEMPLATES (top of dashboard — named snapshots of the whole resume) -->
+    <div class="dash-section">
+      <h2>Templates</h2>
+      <div class="form-field">
+        <label>Select template (loads it instantly)</label>
+        <select id="templateSelect" onchange="loadTemplate(this.value)"></select>
+      </div>
+      <div class="btn-row" style="margin-bottom:8px;">
+        <button class="btn small" onclick="updateCurrentTemplate()">⭱ Update selected</button>
+        <button class="btn small danger" onclick="deleteCurrentTemplate()">🗑 Delete selected</button>
+      </div>
+      <div class="form-field">
+        <label>Save current resume as a new template</label>
+        <input type="text" id="newTemplateName" placeholder="e.g. Backend-focused">
+      </div>
+      <div class="btn-row" style="margin-bottom:8px;">
+        <button class="btn small primary" onclick="saveAsNewTemplate()">+ Save as new template</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn small" onclick="exportSection('templates')">⭳ templates.json</button>
+        <label class="btn small" style="cursor:pointer;">⭱ import<input type="file" accept=".json" onchange="importSection(event,'templates')" style="display:none;"></label>
+      </div>
+    </div>
 
     <div class="dash-section">
       <div class="btn-row" style="margin-bottom:10px;">
@@ -268,6 +292,24 @@ section { margin-top: 6px; }
         <div class="form-field"><label>GitHub link (optional)</label><input type="text" id="f_github" placeholder="https://github.com/..."></div>
         <div class="form-field"><label>YouTube / demo link (optional)</label><input type="text" id="f_youtube" placeholder="https://youtube.com/..."></div>
         <div class="btn-row"><button class="btn primary small" onclick="saveForm()">Save</button><button class="btn small" onclick="closeForm()">Cancel</button></div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATIONS (open by default — picked per job, just like Projects) -->
+    <div class="dash-section">
+      <h2>Certifications (check to include, ↑↓ to reorder)</h2>
+      <div class="btn-row" style="margin-bottom:8px;">
+        <button class="btn small" onclick="exportSection('certifications')">⭳ certifications.json</button>
+        <label class="btn small" style="cursor:pointer;">⭱ import<input type="file" accept=".json" onchange="importSection(event,'certifications')" style="display:none;"></label>
+      </div>
+      <div id="certList"></div>
+      <button class="btn small" style="margin-top:6px;" onclick="openCertForm(null)">+ Add certification</button>
+
+      <div id="certForm">
+        <h3 id="certFormTitle">Add certification</h3>
+        <div class="form-field"><label>Name</label><input type="text" id="c_name" placeholder="e.g. AI Security & GenAI Red Teaming"></div>
+        <div class="form-field"><label>Issuer</label><input type="text" id="c_issuer" placeholder="e.g. ESPRIT"></div>
+        <div class="btn-row"><button class="btn primary small" onclick="saveCertForm()">Save</button><button class="btn small" onclick="closeCertForm()">Cancel</button></div>
       </div>
     </div>
 
@@ -411,7 +453,12 @@ section { margin-top: 6px; }
         <div class="skills" id="skillsOutput"></div>
       </section>
 
-      <div class="bottom-row">
+      <section id="certificationsSection">
+        <div class="sec-title">Certifications</div>
+        <ul class="mini-list" id="certificationsOutput"></ul>
+      </section>
+
+      <div class="bottom-row" id="bottomRow">
         <section style="margin-top:0;">
           <div class="sec-title">Associations</div>
           <ul class="mini-list" id="associationsOutput"></ul>
@@ -475,6 +522,31 @@ const DEFAULT_LANGUAGES = [
   { id: "la1", name: "Arabic", level: "Native" },
   { id: "la2", name: "English", level: "Fluent" },
   { id: "la3", name: "French", level: "Fluent" }
+];
+
+const DEFAULT_CERTIFICATIONS = [
+  { id: "cert1", selected: false, name: "AI Security & GenAI Red Teaming", issuer: "ESPRIT" },
+  { id: "cert2", selected: false, name: "Attendance Hashgraph Developer", issuer: "Hedera" },
+  { id: "cert3", selected: false, name: "AWS Academy Graduate — Cloud Foundations", issuer: "Amazon Web Services (AWS)" },
+  { id: "cert4", selected: false, name: "Applications of AI for Anomaly Detection", issuer: "NVIDIA" },
+  { id: "cert5", selected: false, name: "Building Generative AI-Powered Applications with Python", issuer: "IBM" },
+  { id: "cert6", selected: false, name: "Multi AI Agent Systems with crewAI", issuer: "CrewAI" },
+  { id: "cert7", selected: false, name: "Microsoft Azure AI Essentials Professional Certificate", issuer: "Microsoft" },
+  { id: "cert8", selected: false, name: "Building AI Agents with Multimodal Models", issuer: "NVIDIA" },
+  { id: "cert9", selected: false, name: "Generative AI with Diffusion Models", issuer: "NVIDIA" },
+  { id: "cert10", selected: false, name: "Machine Learning in Production", issuer: "DeepLearning.AI" },
+  { id: "cert11", selected: false, name: "Building LLM Applications With Prompt Engineering", issuer: "NVIDIA" },
+  { id: "cert12", selected: false, name: "Introduction to Transformer-Based Natural Language Processing", issuer: "NVIDIA" },
+  { id: "cert13", selected: false, name: "5-Day Gen AI Intensive", issuer: "Kaggle" },
+  { id: "cert14", selected: false, name: "Building RAG Agents with LLMs", issuer: "NVIDIA" },
+  { id: "cert15", selected: false, name: "Machine Learning Explainability", issuer: "Kaggle" },
+  { id: "cert16", selected: false, name: "Fundamentals of Deep Learning", issuer: "NVIDIA" },
+  { id: "cert17", selected: false, name: "GitHub Foundations", issuer: "GitHub" },
+  { id: "cert18", selected: false, name: "CCNA: Switching, Routing, and Wireless Essentials", issuer: "Cisco" },
+  { id: "cert19", selected: false, name: "Hands-on with Explainable AI Tools & Techniques", issuer: "ESPRIT" },
+  { id: "cert20", selected: false, name: "Artificial Intelligence Fundamentals with Capstone Project", issuer: "IBM" },
+  { id: "cert21", selected: false, name: "Agentic AI for Enterprise", issuer: "ESPRIT" },
+  { id: "cert22", selected: false, name: "Data Engineering & MLOps", issuer: "ESPRIT" }
 ];
 
 const DEFAULT_PROJECTS = [
@@ -555,6 +627,22 @@ const DEFAULT_PROJECTS = [
     ], techStack: "Odoo, Python, OpenCV" }
 ];
 
+/* Templates are named snapshots of the whole resume (profile + every section),
+   stored separately from the "live" data so switching templates is a load, not a merge. */
+function snapshotFromDefaults() {
+  return {
+    profile: DEFAULT_PROFILE,
+    education: JSON.parse(JSON.stringify(DEFAULT_EDUCATION)),
+    experience: JSON.parse(JSON.stringify(DEFAULT_EXPERIENCE)),
+    projects: JSON.parse(JSON.stringify(DEFAULT_PROJECTS)),
+    certifications: JSON.parse(JSON.stringify(DEFAULT_CERTIFICATIONS)),
+    skills: JSON.parse(JSON.stringify(DEFAULT_SKILLS)),
+    associations: JSON.parse(JSON.stringify(DEFAULT_ASSOCIATIONS)),
+    languages: JSON.parse(JSON.stringify(DEFAULT_LANGUAGES))
+  };
+}
+const DEFAULT_TEMPLATES = [{ id: 'default', name: 'Default', data: snapshotFromDefaults() }];
+
 /* field schemas for the generic list sections (everything except profile & projects) */
 const SCHEMAS = {
   education: [
@@ -587,7 +675,11 @@ const SCHEMAS = {
 const STORAGE_PREFIX = 'resume_';
 let profileText = '';
 let projects = [];
+let certifications = [];
 let editingId = null; // for projects form
+let editingCertId = null; // for certifications form
+let templates = [];
+let activeTemplateId = null;
 
 const genericStores = { education: [], experience: [], skills: [], associations: [], languages: [] };
 let genericEditing = { section: null, id: null };
@@ -612,19 +704,31 @@ function loadAll() {
   const proj = localStorage.getItem(STORAGE_PREFIX + 'projects');
   projects = proj ? JSON.parse(proj) : JSON.parse(JSON.stringify(DEFAULT_PROJECTS));
 
+  const cert = localStorage.getItem(STORAGE_PREFIX + 'certifications');
+  certifications = cert ? JSON.parse(cert) : JSON.parse(JSON.stringify(DEFAULT_CERTIFICATIONS));
+
   for (const key of Object.keys(genericStores)) {
     const raw = localStorage.getItem(STORAGE_PREFIX + key);
     const def = { education: DEFAULT_EDUCATION, experience: DEFAULT_EXPERIENCE, skills: DEFAULT_SKILLS, associations: DEFAULT_ASSOCIATIONS, languages: DEFAULT_LANGUAGES }[key];
     genericStores[key] = raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(def));
   }
+
+  const tmpl = localStorage.getItem(STORAGE_PREFIX + 'templates');
+  templates = tmpl ? JSON.parse(tmpl) : JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
+  activeTemplateId = localStorage.getItem(STORAGE_PREFIX + 'activeTemplateId') || (templates[0] && templates[0].id) || null;
 }
 function saveProfileData() { localStorage.setItem(STORAGE_PREFIX + 'profile', JSON.stringify(profileText)); }
 function saveProjects() { localStorage.setItem(STORAGE_PREFIX + 'projects', JSON.stringify(projects)); }
+function saveCertifications() { localStorage.setItem(STORAGE_PREFIX + 'certifications', JSON.stringify(certifications)); }
 function saveGenericStore(key) { localStorage.setItem(STORAGE_PREFIX + key, JSON.stringify(genericStores[key])); }
+function saveTemplates() { localStorage.setItem(STORAGE_PREFIX + 'templates', JSON.stringify(templates)); }
+function saveActiveTemplateId() { localStorage.setItem(STORAGE_PREFIX + 'activeTemplateId', activeTemplateId || ''); }
 
 /* ── RENDER: dashboard lists ─────────────────────────────── */
 function renderAll() {
+  renderTemplateSelect();
   renderProjectList();
+  renderCertList();
   renderGenericList('education', p => p.institution, p => `${p.degree} · ${p.dateRange}`);
   renderGenericList('experience', p => p.title, p => `${p.companyLine.replace(/&nbsp;/g,' ')} · ${p.dateRange}`);
   renderGenericList('skills', p => p.category, p => p.items);
@@ -653,6 +757,32 @@ function renderProjectList() {
         </div>
         <button title="Edit" onclick="openForm('${p.id}')">✎</button>
         <button title="Delete" onclick="deleteProject('${p.id}')">🗑</button>
+      </div>
+    `;
+    list.appendChild(item);
+  });
+}
+
+function renderCertList() {
+  const list = document.getElementById('certList');
+  if (!list) return;
+  list.innerHTML = '';
+  certifications.forEach(c => {
+    const item = document.createElement('div');
+    item.className = 'proj-item' + (c.selected ? ' selected' : '');
+    item.innerHTML = `
+      <input type="checkbox" ${c.selected ? 'checked' : ''} onchange="toggleCertSelected('${c.id}')">
+      <div class="body">
+        <div class="title">${escapeHTML(c.name)}</div>
+        <div class="tech">${escapeHTML(c.issuer)}</div>
+      </div>
+      <div class="actions">
+        <div class="up-down">
+          <button title="Move up" onclick="moveCert('${c.id}', -1)">▲</button>
+          <button title="Move down" onclick="moveCert('${c.id}', 1)">▼</button>
+        </div>
+        <button title="Edit" onclick="openCertForm('${c.id}')">✎</button>
+        <button title="Delete" onclick="deleteCert('${c.id}')">🗑</button>
       </div>
     `;
     list.appendChild(item);
@@ -738,6 +868,55 @@ function saveForm() {
   saveProjects(); closeForm(); renderAll(); setStatus('Saved.');
 }
 
+/* ── CERTIFICATIONS: select / reorder / delete / add / edit ─ */
+function toggleCertSelected(id) {
+  const c = certifications.find(c => c.id === id);
+  if (c) c.selected = !c.selected;
+  saveCertifications(); renderAll();
+}
+function moveCert(id, dir) {
+  const i = certifications.findIndex(c => c.id === id);
+  const j = i + dir;
+  if (j < 0 || j >= certifications.length) return;
+  [certifications[i], certifications[j]] = [certifications[j], certifications[i]];
+  saveCertifications(); renderAll();
+}
+function deleteCert(id) {
+  if (!confirm('Delete this certification from the database? This cannot be undone.')) return;
+  certifications = certifications.filter(c => c.id !== id);
+  saveCertifications(); renderAll();
+  setStatus('Certification deleted.');
+}
+function openCertForm(id) {
+  editingCertId = id;
+  const form = document.getElementById('certForm');
+  form.classList.add('open');
+  if (id) {
+    const c = certifications.find(c => c.id === id);
+    document.getElementById('certFormTitle').textContent = 'Edit certification';
+    document.getElementById('c_name').value = c.name;
+    document.getElementById('c_issuer').value = c.issuer;
+  } else {
+    document.getElementById('certFormTitle').textContent = 'Add certification';
+    document.getElementById('c_name').value = '';
+    document.getElementById('c_issuer').value = '';
+  }
+  form.scrollIntoView && form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+function closeCertForm() { editingCertId = null; document.getElementById('certForm').classList.remove('open'); }
+function saveCertForm() {
+  const name = document.getElementById('c_name').value.trim();
+  const issuer = document.getElementById('c_issuer').value.trim();
+  if (!name) { setStatus('Certification name is required.'); return; }
+  if (editingCertId) {
+    const c = certifications.find(c => c.id === editingCertId);
+    c.name = name; c.issuer = issuer;
+  } else {
+    certifications.push({ id: 'cert_' + Date.now(), selected: true, name, issuer });
+  }
+  saveCertifications(); closeCertForm(); renderAll(); setStatus('Saved.');
+}
+
 /* ── GENERIC SECTIONS: reorder / delete / add / edit ─────── */
 function moveGenericItem(section, id, dir) {
   const arr = genericStores[section];
@@ -802,6 +981,91 @@ function saveProfile() {
   setStatus('Profile saved.');
 }
 
+/* ── TEMPLATES: select / save / update / delete ──────────── */
+function renderTemplateSelect() {
+  const sel = document.getElementById('templateSelect');
+  if (!sel) return;
+  sel.innerHTML = templates.map(t =>
+    `<option value="${escapeAttr(t.id)}" ${t.id === activeTemplateId ? 'selected' : ''}>${escapeHTML(t.name)}</option>`
+  ).join('');
+}
+function currentSnapshot() {
+  return {
+    profile: profileText,
+    education: JSON.parse(JSON.stringify(genericStores.education)),
+    experience: JSON.parse(JSON.stringify(genericStores.experience)),
+    projects: JSON.parse(JSON.stringify(projects)),
+    certifications: JSON.parse(JSON.stringify(certifications)),
+    skills: JSON.parse(JSON.stringify(genericStores.skills)),
+    associations: JSON.parse(JSON.stringify(genericStores.associations)),
+    languages: JSON.parse(JSON.stringify(genericStores.languages))
+  };
+}
+function applySnapshot(data) {
+  profileText = data.profile || '';
+  saveProfileData();
+  projects = Array.isArray(data.projects) ? JSON.parse(JSON.stringify(data.projects)) : [];
+  saveProjects();
+  certifications = Array.isArray(data.certifications) ? JSON.parse(JSON.stringify(data.certifications)) : [];
+  saveCertifications();
+  for (const key of ['education', 'experience', 'skills', 'associations', 'languages']) {
+    genericStores[key] = Array.isArray(data[key]) ? JSON.parse(JSON.stringify(data[key])) : [];
+    saveGenericStore(key);
+  }
+  renderAll();
+}
+function loadTemplate(id) {
+  const t = templates.find(t => t.id === id);
+  if (!t) return;
+  activeTemplateId = id;
+  saveActiveTemplateId();
+  applySnapshot(t.data);
+  setStatus('Loaded "' + t.name + '".');
+}
+function saveAsNewTemplate() {
+  const input = document.getElementById('newTemplateName');
+  const name = input.value.trim();
+  if (!name) { setStatus('Enter a name for the template.'); return; }
+  const id = 'tmpl_' + Date.now();
+  templates.push({ id, name, data: currentSnapshot() });
+  activeTemplateId = id;
+  saveTemplates(); saveActiveTemplateId();
+  input.value = '';
+  renderAll();
+  setStatus('Saved template "' + name + '".');
+}
+function updateCurrentTemplate() {
+  const sel = document.getElementById('templateSelect');
+  const id = sel ? sel.value : activeTemplateId;
+  const t = templates.find(t => t.id === id);
+  if (!t) return;
+  if (!confirm('Overwrite template "' + t.name + '" with the current resume data?')) return;
+  t.data = currentSnapshot();
+  activeTemplateId = id;
+  saveTemplates(); saveActiveTemplateId();
+  renderAll();
+  setStatus('Updated template "' + t.name + '".');
+}
+function deleteCurrentTemplate() {
+  const sel = document.getElementById('templateSelect');
+  const id = sel ? sel.value : activeTemplateId;
+  const t = templates.find(t => t.id === id);
+  if (!t) return;
+  if (templates.length <= 1) { setStatus('Keep at least one template.'); return; }
+  if (!confirm('Delete template "' + t.name + '"? This cannot be undone.')) return;
+  templates = templates.filter(x => x.id !== id);
+  saveTemplates();
+  if (activeTemplateId === id) {
+    const fallback = templates[0];
+    activeTemplateId = fallback.id;
+    saveActiveTemplateId();
+    applySnapshot(fallback.data); // loads the fallback template's data so preview/dashboard match the selector
+  } else {
+    renderAll();
+  }
+  setStatus('Template deleted.');
+}
+
 /* ── EXPORT / IMPORT ──────────────────────────────────────── */
 function downloadJSON(filename, data) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -814,6 +1078,8 @@ function downloadJSON(filename, data) {
 function exportSection(section) {
   if (section === 'profile') { downloadJSON('profile.json', { text: profileText }); return; }
   if (section === 'projects') { downloadJSON('projects.json', projects); return; }
+  if (section === 'certifications') { downloadJSON('certifications.json', certifications); return; }
+  if (section === 'templates') { downloadJSON('templates.json', templates); return; }
   downloadJSON(section + '.json', genericStores[section]);
 }
 
@@ -836,6 +1102,22 @@ function importSection(event, section) {
           techStack: p.techStack || '', github: p.github || '', youtube: p.youtube || ''
         }));
         saveProjects();
+      } else if (section === 'certifications') {
+        if (!Array.isArray(data)) throw new Error('not an array');
+        certifications = data.map(c => ({
+          id: c.id || ('cert_' + Math.random().toString(36).slice(2)),
+          selected: !!c.selected, name: c.name || 'Untitled', issuer: c.issuer || ''
+        }));
+        saveCertifications();
+      } else if (section === 'templates') {
+        if (!Array.isArray(data)) throw new Error('not an array');
+        templates = data.map(t => ({
+          id: t.id || ('tmpl_' + Math.random().toString(36).slice(2)),
+          name: t.name || 'Untitled',
+          data: t.data || {}
+        }));
+        if (!templates.find(t => t.id === activeTemplateId)) activeTemplateId = templates[0] ? templates[0].id : null;
+        saveTemplates(); saveActiveTemplateId();
       } else {
         if (!Array.isArray(data)) throw new Error('not an array');
         genericStores[section] = data.map((p, i) => ({ id: p.id || (section + '_' + i + '_' + Date.now()), ...p }));
@@ -857,9 +1139,11 @@ function exportAll() {
     education: genericStores.education,
     experience: genericStores.experience,
     projects: projects,
+    certifications: certifications,
     skills: genericStores.skills,
     associations: genericStores.associations,
-    languages: genericStores.languages
+    languages: genericStores.languages,
+    templates: templates
   });
 }
 
@@ -872,6 +1156,8 @@ function importAll(event) {
       const data = JSON.parse(reader.result);
       if (typeof data.profile === 'string') { profileText = data.profile; saveProfileData(); }
       if (Array.isArray(data.projects)) { projects = data.projects; saveProjects(); }
+      if (Array.isArray(data.certifications)) { certifications = data.certifications; saveCertifications(); }
+      if (Array.isArray(data.templates)) { templates = data.templates; saveTemplates(); }
       for (const key of ['education','experience','skills','associations','languages']) {
         if (Array.isArray(data[key])) { genericStores[key] = data[key]; saveGenericStore(key); }
       }
@@ -886,14 +1172,17 @@ function importAll(event) {
 }
 
 function resetAllToDefaults() {
-  if (!confirm('Reset ALL sections (profile, education, experience, projects, skills, associations, languages) to their original defaults? All your edits will be lost.')) return;
+  if (!confirm('Reset ALL sections (profile, education, experience, projects, certifications, skills, associations, languages, templates) to their original defaults? All your edits will be lost.')) return;
   profileText = DEFAULT_PROFILE; saveProfileData();
   projects = JSON.parse(JSON.stringify(DEFAULT_PROJECTS)); saveProjects();
+  certifications = JSON.parse(JSON.stringify(DEFAULT_CERTIFICATIONS)); saveCertifications();
   genericStores.education = JSON.parse(JSON.stringify(DEFAULT_EDUCATION)); saveGenericStore('education');
   genericStores.experience = JSON.parse(JSON.stringify(DEFAULT_EXPERIENCE)); saveGenericStore('experience');
   genericStores.skills = JSON.parse(JSON.stringify(DEFAULT_SKILLS)); saveGenericStore('skills');
   genericStores.associations = JSON.parse(JSON.stringify(DEFAULT_ASSOCIATIONS)); saveGenericStore('associations');
   genericStores.languages = JSON.parse(JSON.stringify(DEFAULT_LANGUAGES)); saveGenericStore('languages');
+  templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES)); saveTemplates();
+  activeTemplateId = templates[0] ? templates[0].id : null; saveActiveTemplateId();
   renderAll();
   setStatus('Everything reset to defaults.');
 }
@@ -962,6 +1251,19 @@ function renderResumePreview() {
       <div class="skill-val">${escapeHTML(s.items)}</div>
     </div>
   `).join('\n');
+
+  // Certifications
+  const selectedCerts = certifications.filter(c => c.selected);
+  const certOut = document.getElementById('certificationsOutput');
+  const certSection = document.getElementById('certificationsSection');
+  if (certOut) {
+    certOut.innerHTML = selectedCerts.map(c => `
+      <li><span class="mkey">${escapeHTML(c.name)}</span><span class="mval">${escapeHTML(c.issuer)}</span></li>
+    `).join('\n');
+  }
+  if (certSection) {
+    certSection.style.display = selectedCerts.length ? '' : 'none';
+  }
 
   // Associations
   document.getElementById('associationsOutput').innerHTML = genericStores.associations.map(a => `
