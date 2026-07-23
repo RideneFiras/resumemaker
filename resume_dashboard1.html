@@ -239,6 +239,7 @@ section { margin-top: 5px; }
     <!-- TEMPLATES (top of dashboard — named snapshots of the whole resume) -->
     <div class="dash-section">
       <h2>Templates</h2>
+      <div class="sub" style="margin-bottom:8px;">Profile, education, experience, skills, associations & languages are saved per template. Projects and certifications are one shared list — templates just remember which ones are checked and their order.</div>
       <div class="form-field">
         <label>Select template (loads it instantly)</label>
         <select id="templateSelect" onchange="loadTemplate(this.value)"></select>
@@ -417,13 +418,17 @@ section { margin-top: 5px; }
             <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.47 11.47 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
             +216 92 213 106
           </span>
-          <a href="https://github.com/RideneFiras">
+          <a href="https://github.com/RideneFiras" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
             github.com/RideneFiras
           </a>
-          <a href="https://www.linkedin.com/in/firas-ridene/">
+          <a href="https://www.linkedin.com/in/firas-ridene/" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M20.447 20.452H16.89v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a1.98 1.98 0 110-3.96 1.98 1.98 0 010 3.96zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             linkedin.com/in/firas-ridene
+          </a>
+          <a href="https://firasridene.tech/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.93 9h-3.05a15.85 15.85 0 00-1.32-5.36A8.03 8.03 0 0119.93 11zM12 4.06c.83 1.2 1.98 3.25 2.28 6.94H9.72c.3-3.69 1.45-5.74 2.28-6.94zM9.72 13h4.56c-.3 3.69-1.45 5.74-2.28 6.94-.83-1.2-1.98-3.25-2.28-6.94zM8.44 5.64A15.85 15.85 0 007.12 11H4.07a8.03 8.03 0 014.37-5.36zM4.07 13h3.05a15.85 15.85 0 001.32 5.36A8.03 8.03 0 014.07 13zm11.49 5.36A15.85 15.85 0 0016.88 13h3.05a8.03 8.03 0 01-4.37 5.36z"/></svg>
+            firasridene.tech
           </a>
         </div>
       </header>
@@ -627,18 +632,30 @@ const DEFAULT_PROJECTS = [
     ], techStack: "Odoo, Python, OpenCV" }
 ];
 
-/* Templates are named snapshots of the whole resume (profile + every section),
-   stored separately from the "live" data so switching templates is a load, not a merge. */
+/* Projects and certifications are ONE shared database (add/edit/delete affects every
+   template). Templates only remember which ids are checked and in what order — everything
+   else (profile, education, experience, skills, associations, languages) is still a full
+   per-template snapshot. */
+function stripSelected(arr) {
+  return arr.map(o => { const c = { ...o }; delete c.selected; return c; });
+}
+const DEFAULT_MASTER_PROJECTS = stripSelected(DEFAULT_PROJECTS);
+const DEFAULT_MASTER_CERTIFICATIONS = stripSelected(DEFAULT_CERTIFICATIONS);
+
 function snapshotFromDefaults() {
+  const projectSelection = {}; DEFAULT_PROJECTS.forEach(p => { projectSelection[p.id] = !!p.selected; });
+  const certSelection = {}; DEFAULT_CERTIFICATIONS.forEach(c => { certSelection[c.id] = !!c.selected; });
   return {
     profile: DEFAULT_PROFILE,
     education: JSON.parse(JSON.stringify(DEFAULT_EDUCATION)),
     experience: JSON.parse(JSON.stringify(DEFAULT_EXPERIENCE)),
-    projects: JSON.parse(JSON.stringify(DEFAULT_PROJECTS)),
-    certifications: JSON.parse(JSON.stringify(DEFAULT_CERTIFICATIONS)),
     skills: JSON.parse(JSON.stringify(DEFAULT_SKILLS)),
     associations: JSON.parse(JSON.stringify(DEFAULT_ASSOCIATIONS)),
-    languages: JSON.parse(JSON.stringify(DEFAULT_LANGUAGES))
+    languages: JSON.parse(JSON.stringify(DEFAULT_LANGUAGES)),
+    projectSelection: projectSelection,
+    projectOrder: DEFAULT_PROJECTS.map(p => p.id),
+    certSelection: certSelection,
+    certOrder: DEFAULT_CERTIFICATIONS.map(c => c.id)
   };
 }
 const DEFAULT_TEMPLATES = [{ id: 'default', name: 'Default', data: snapshotFromDefaults() }];
@@ -674,8 +691,10 @@ const SCHEMAS = {
 
 const STORAGE_PREFIX = 'resume_';
 let profileText = '';
-let projects = [];
-let certifications = [];
+let masterProjects = [];       // shared project database (content only, no selected/order)
+let masterCertifications = []; // shared certification database (content only)
+let projects = [];        // derived working view for the active template: master content + that template's selected/order
+let certifications = [];  // derived working view for the active template
 let editingId = null; // for projects form
 let editingCertId = null; // for certifications form
 let templates = [];
@@ -701,11 +720,11 @@ function loadAll() {
   const p = localStorage.getItem(STORAGE_PREFIX + 'profile');
   profileText = p !== null ? JSON.parse(p) : DEFAULT_PROFILE;
 
-  const proj = localStorage.getItem(STORAGE_PREFIX + 'projects');
-  projects = proj ? JSON.parse(proj) : JSON.parse(JSON.stringify(DEFAULT_PROJECTS));
+  const mp = localStorage.getItem(STORAGE_PREFIX + 'projects_master');
+  masterProjects = mp ? JSON.parse(mp) : JSON.parse(JSON.stringify(DEFAULT_MASTER_PROJECTS));
 
-  const cert = localStorage.getItem(STORAGE_PREFIX + 'certifications');
-  certifications = cert ? JSON.parse(cert) : JSON.parse(JSON.stringify(DEFAULT_CERTIFICATIONS));
+  const mc = localStorage.getItem(STORAGE_PREFIX + 'certifications_master');
+  masterCertifications = mc ? JSON.parse(mc) : JSON.parse(JSON.stringify(DEFAULT_MASTER_CERTIFICATIONS));
 
   for (const key of Object.keys(genericStores)) {
     const raw = localStorage.getItem(STORAGE_PREFIX + key);
@@ -716,13 +735,114 @@ function loadAll() {
   const tmpl = localStorage.getItem(STORAGE_PREFIX + 'templates');
   templates = tmpl ? JSON.parse(tmpl) : JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
   activeTemplateId = localStorage.getItem(STORAGE_PREFIX + 'activeTemplateId') || (templates[0] && templates[0].id) || null;
+
+  migrateLegacyTemplates();
+  rebuildProjectsFromTemplate();
+  rebuildCertsFromTemplate();
 }
 function saveProfileData() { localStorage.setItem(STORAGE_PREFIX + 'profile', JSON.stringify(profileText)); }
-function saveProjects() { localStorage.setItem(STORAGE_PREFIX + 'projects', JSON.stringify(projects)); }
-function saveCertifications() { localStorage.setItem(STORAGE_PREFIX + 'certifications', JSON.stringify(certifications)); }
+function saveMasterProjects() { localStorage.setItem(STORAGE_PREFIX + 'projects_master', JSON.stringify(masterProjects)); }
+function saveMasterCertifications() { localStorage.setItem(STORAGE_PREFIX + 'certifications_master', JSON.stringify(masterCertifications)); }
 function saveGenericStore(key) { localStorage.setItem(STORAGE_PREFIX + key, JSON.stringify(genericStores[key])); }
 function saveTemplates() { localStorage.setItem(STORAGE_PREFIX + 'templates', JSON.stringify(templates)); }
 function saveActiveTemplateId() { localStorage.setItem(STORAGE_PREFIX + 'activeTemplateId', activeTemplateId || ''); }
+
+function currentTemplate() {
+  return templates.find(t => t.id === activeTemplateId) || templates[0];
+}
+
+/* Builds the working (per-template) list: master content, ordered and flagged per the
+   template's stored order/selection. Ids the template has never seen (newly added
+   elsewhere) are appended at the end, unselected. */
+function buildWorkingList(master, order, selection) {
+  const byId = {};
+  master.forEach(m => { byId[m.id] = m; });
+  const seen = new Set();
+  const ordered = [];
+  (order || []).forEach(id => { if (byId[id] && !seen.has(id)) { ordered.push(byId[id]); seen.add(id); } });
+  master.forEach(m => { if (!seen.has(m.id)) { ordered.push(m); seen.add(m.id); } });
+  return ordered.map(m => ({ ...JSON.parse(JSON.stringify(m)), selected: !!(selection && selection[m.id]) }));
+}
+function rebuildProjectsFromTemplate() {
+  const t = currentTemplate();
+  const data = t ? t.data : {};
+  projects = buildWorkingList(masterProjects, data.projectOrder, data.projectSelection);
+}
+function rebuildCertsFromTemplate() {
+  const t = currentTemplate();
+  const data = t ? t.data : {};
+  certifications = buildWorkingList(masterCertifications, data.certOrder, data.certSelection);
+}
+/* Persists the current in-memory selection/order for Projects or Certifications into the
+   active template (write-through, same autosave behavior as every other toggle in this app). */
+function persistProjectSelection() {
+  const t = currentTemplate();
+  if (!t) return;
+  t.data.projectSelection = {};
+  projects.forEach(p => { t.data.projectSelection[p.id] = !!p.selected; });
+  t.data.projectOrder = projects.map(p => p.id);
+  saveTemplates();
+}
+function persistCertSelection() {
+  const t = currentTemplate();
+  if (!t) return;
+  t.data.certSelection = {};
+  certifications.forEach(c => { t.data.certSelection[c.id] = !!c.selected; });
+  t.data.certOrder = certifications.map(c => c.id);
+  saveTemplates();
+}
+
+/* One-time migration from the earlier template format, where each template carried its own
+   full copy of the projects/certifications arrays (the bug: adding a project under one
+   template didn't show up under another). Merges all known project/cert content into the
+   shared master lists (preferring the active template's version for ids that differ), then
+   rewrites every template to the new order/selection-only format. */
+function migrateLegacyTemplates() {
+  const hasLegacy = templates.some(t => Array.isArray(t.data && t.data.projects) || Array.isArray(t.data && t.data.certifications));
+  if (!hasLegacy) return;
+
+  const active = currentTemplate();
+  const orderedTemplates = active ? [active, ...templates.filter(t => t !== active)] : templates;
+
+  const projectById = {};
+  const certById = {};
+  orderedTemplates.forEach(t => {
+    if (Array.isArray(t.data.projects)) {
+      t.data.projects.forEach(p => {
+        if (!projectById[p.id]) { const { selected, ...content } = p; projectById[p.id] = content; }
+      });
+    }
+    if (Array.isArray(t.data.certifications)) {
+      t.data.certifications.forEach(c => {
+        if (!certById[c.id]) { const { selected, ...content } = c; certById[c.id] = content; }
+      });
+    }
+  });
+
+  const existingProjectIds = new Set(masterProjects.map(p => p.id));
+  Object.values(projectById).forEach(p => { if (!existingProjectIds.has(p.id)) masterProjects.push(p); });
+  const existingCertIds = new Set(masterCertifications.map(c => c.id));
+  Object.values(certById).forEach(c => { if (!existingCertIds.has(c.id)) masterCertifications.push(c); });
+
+  templates.forEach(t => {
+    if (Array.isArray(t.data.projects)) {
+      t.data.projectOrder = t.data.projects.map(p => p.id);
+      t.data.projectSelection = {};
+      t.data.projects.forEach(p => { t.data.projectSelection[p.id] = !!p.selected; });
+      delete t.data.projects;
+    }
+    if (Array.isArray(t.data.certifications)) {
+      t.data.certOrder = t.data.certifications.map(c => c.id);
+      t.data.certSelection = {};
+      t.data.certifications.forEach(c => { t.data.certSelection[c.id] = !!c.selected; });
+      delete t.data.certifications;
+    }
+  });
+
+  saveMasterProjects();
+  saveMasterCertifications();
+  saveTemplates();
+}
 
 /* ── RENDER: dashboard lists ─────────────────────────────── */
 function renderAll() {
@@ -815,22 +935,31 @@ function renderGenericList(section, titleFn, subFn) {
 }
 
 /* ── PROJECTS: select / reorder / delete ─────────────────── */
+/* Content (title/bullets/techStack/links) lives in the shared masterProjects database and
+   is visible from every template. Only the checkbox state and order are per-template. */
 function toggleSelected(id) {
   const p = projects.find(p => p.id === id);
   if (p) p.selected = !p.selected;
-  saveProjects(); renderAll();
+  persistProjectSelection(); renderAll();
 }
 function moveProject(id, dir) {
   const i = projects.findIndex(p => p.id === id);
   const j = i + dir;
   if (j < 0 || j >= projects.length) return;
   [projects[i], projects[j]] = [projects[j], projects[i]];
-  saveProjects(); renderAll();
+  persistProjectSelection(); renderAll();
 }
 function deleteProject(id) {
-  if (!confirm('Delete this project from the database? This cannot be undone.')) return;
-  projects = projects.filter(p => p.id !== id);
-  saveProjects(); renderAll();
+  if (!confirm('Delete this project from the shared database? It will be removed from every template. This cannot be undone.')) return;
+  masterProjects = masterProjects.filter(p => p.id !== id);
+  saveMasterProjects();
+  templates.forEach(t => {
+    if (t.data.projectSelection) delete t.data.projectSelection[id];
+    if (t.data.projectOrder) t.data.projectOrder = t.data.projectOrder.filter(x => x !== id);
+  });
+  saveTemplates();
+  rebuildProjectsFromTemplate();
+  renderAll();
   setStatus('Project deleted.');
 }
 function openForm(id) {
@@ -838,7 +967,7 @@ function openForm(id) {
   const form = document.getElementById('editForm');
   form.classList.add('open');
   if (id) {
-    const p = projects.find(p => p.id === id);
+    const p = masterProjects.find(p => p.id === id);
     document.getElementById('formTitle').textContent = 'Edit project';
     document.getElementById('f_title').value = p.title;
     document.getElementById('f_bullets').value = p.bullets.join('\n');
@@ -860,31 +989,50 @@ function saveForm() {
   const youtube = document.getElementById('f_youtube').value.trim();
   if (!title || bullets.length === 0) { setStatus('Title and at least one bullet are required.'); return; }
   if (editingId) {
-    const p = projects.find(p => p.id === editingId);
+    const p = masterProjects.find(p => p.id === editingId);
     p.title = title; p.bullets = bullets; p.techStack = techStack; p.github = github; p.youtube = youtube;
   } else {
-    projects.push({ id: 'proj_' + Date.now(), selected: true, title, bullets, techStack, github, youtube });
+    const id = 'proj_' + Date.now();
+    masterProjects.push({ id, title, bullets, techStack, github, youtube });
+    const t = currentTemplate();
+    if (t) {
+      if (!t.data.projectSelection) t.data.projectSelection = {};
+      if (!t.data.projectOrder) t.data.projectOrder = [];
+      t.data.projectSelection[id] = true; // checked on the template you added it from; unchecked elsewhere until you opt in
+      t.data.projectOrder.push(id);
+    }
   }
-  saveProjects(); closeForm(); renderAll(); setStatus('Saved.');
+  saveMasterProjects();
+  saveTemplates();
+  rebuildProjectsFromTemplate();
+  closeForm(); renderAll(); setStatus('Saved.');
 }
 
 /* ── CERTIFICATIONS: select / reorder / delete / add / edit ─ */
+/* Same shared-database / per-template-selection split as Projects, above. */
 function toggleCertSelected(id) {
   const c = certifications.find(c => c.id === id);
   if (c) c.selected = !c.selected;
-  saveCertifications(); renderAll();
+  persistCertSelection(); renderAll();
 }
 function moveCert(id, dir) {
   const i = certifications.findIndex(c => c.id === id);
   const j = i + dir;
   if (j < 0 || j >= certifications.length) return;
   [certifications[i], certifications[j]] = [certifications[j], certifications[i]];
-  saveCertifications(); renderAll();
+  persistCertSelection(); renderAll();
 }
 function deleteCert(id) {
-  if (!confirm('Delete this certification from the database? This cannot be undone.')) return;
-  certifications = certifications.filter(c => c.id !== id);
-  saveCertifications(); renderAll();
+  if (!confirm('Delete this certification from the shared database? It will be removed from every template. This cannot be undone.')) return;
+  masterCertifications = masterCertifications.filter(c => c.id !== id);
+  saveMasterCertifications();
+  templates.forEach(t => {
+    if (t.data.certSelection) delete t.data.certSelection[id];
+    if (t.data.certOrder) t.data.certOrder = t.data.certOrder.filter(x => x !== id);
+  });
+  saveTemplates();
+  rebuildCertsFromTemplate();
+  renderAll();
   setStatus('Certification deleted.');
 }
 function openCertForm(id) {
@@ -892,7 +1040,7 @@ function openCertForm(id) {
   const form = document.getElementById('certForm');
   form.classList.add('open');
   if (id) {
-    const c = certifications.find(c => c.id === id);
+    const c = masterCertifications.find(c => c.id === id);
     document.getElementById('certFormTitle').textContent = 'Edit certification';
     document.getElementById('c_name').value = c.name;
     document.getElementById('c_issuer').value = c.issuer;
@@ -909,12 +1057,23 @@ function saveCertForm() {
   const issuer = document.getElementById('c_issuer').value.trim();
   if (!name) { setStatus('Certification name is required.'); return; }
   if (editingCertId) {
-    const c = certifications.find(c => c.id === editingCertId);
+    const c = masterCertifications.find(c => c.id === editingCertId);
     c.name = name; c.issuer = issuer;
   } else {
-    certifications.push({ id: 'cert_' + Date.now(), selected: true, name, issuer });
+    const id = 'cert_' + Date.now();
+    masterCertifications.push({ id, name, issuer });
+    const t = currentTemplate();
+    if (t) {
+      if (!t.data.certSelection) t.data.certSelection = {};
+      if (!t.data.certOrder) t.data.certOrder = [];
+      t.data.certSelection[id] = true;
+      t.data.certOrder.push(id);
+    }
   }
-  saveCertifications(); closeCertForm(); renderAll(); setStatus('Saved.');
+  saveMasterCertifications();
+  saveTemplates();
+  rebuildCertsFromTemplate();
+  closeCertForm(); renderAll(); setStatus('Saved.');
 }
 
 /* ── GENERIC SECTIONS: reorder / delete / add / edit ─────── */
@@ -990,28 +1149,30 @@ function renderTemplateSelect() {
   ).join('');
 }
 function currentSnapshot() {
+  const projectSelection = {}; projects.forEach(p => { projectSelection[p.id] = !!p.selected; });
+  const certSelection = {}; certifications.forEach(c => { certSelection[c.id] = !!c.selected; });
   return {
     profile: profileText,
     education: JSON.parse(JSON.stringify(genericStores.education)),
     experience: JSON.parse(JSON.stringify(genericStores.experience)),
-    projects: JSON.parse(JSON.stringify(projects)),
-    certifications: JSON.parse(JSON.stringify(certifications)),
     skills: JSON.parse(JSON.stringify(genericStores.skills)),
     associations: JSON.parse(JSON.stringify(genericStores.associations)),
-    languages: JSON.parse(JSON.stringify(genericStores.languages))
+    languages: JSON.parse(JSON.stringify(genericStores.languages)),
+    projectSelection: projectSelection,
+    projectOrder: projects.map(p => p.id),
+    certSelection: certSelection,
+    certOrder: certifications.map(c => c.id)
   };
 }
 function applySnapshot(data) {
   profileText = data.profile || '';
   saveProfileData();
-  projects = Array.isArray(data.projects) ? JSON.parse(JSON.stringify(data.projects)) : [];
-  saveProjects();
-  certifications = Array.isArray(data.certifications) ? JSON.parse(JSON.stringify(data.certifications)) : [];
-  saveCertifications();
   for (const key of ['education', 'experience', 'skills', 'associations', 'languages']) {
     genericStores[key] = Array.isArray(data[key]) ? JSON.parse(JSON.stringify(data[key])) : [];
     saveGenericStore(key);
   }
+  rebuildProjectsFromTemplate();
+  rebuildCertsFromTemplate();
   renderAll();
 }
 function loadTemplate(id) {
@@ -1077,8 +1238,8 @@ function downloadJSON(filename, data) {
 
 function exportSection(section) {
   if (section === 'profile') { downloadJSON('profile.json', { text: profileText }); return; }
-  if (section === 'projects') { downloadJSON('projects.json', projects); return; }
-  if (section === 'certifications') { downloadJSON('certifications.json', certifications); return; }
+  if (section === 'projects') { downloadJSON('projects.json', masterProjects); return; }
+  if (section === 'certifications') { downloadJSON('certifications.json', masterCertifications); return; }
   if (section === 'templates') { downloadJSON('templates.json', templates); return; }
   downloadJSON(section + '.json', genericStores[section]);
 }
@@ -1095,20 +1256,22 @@ function importSection(event, section) {
         saveProfileData();
       } else if (section === 'projects') {
         if (!Array.isArray(data)) throw new Error('not an array');
-        projects = data.map(p => ({
+        masterProjects = data.map(p => ({
           id: p.id || ('proj_' + Math.random().toString(36).slice(2)),
-          selected: !!p.selected, title: p.title || 'Untitled',
+          title: p.title || 'Untitled',
           bullets: Array.isArray(p.bullets) ? p.bullets : [],
           techStack: p.techStack || '', github: p.github || '', youtube: p.youtube || ''
         }));
-        saveProjects();
+        saveMasterProjects();
+        rebuildProjectsFromTemplate();
       } else if (section === 'certifications') {
         if (!Array.isArray(data)) throw new Error('not an array');
-        certifications = data.map(c => ({
+        masterCertifications = data.map(c => ({
           id: c.id || ('cert_' + Math.random().toString(36).slice(2)),
-          selected: !!c.selected, name: c.name || 'Untitled', issuer: c.issuer || ''
+          name: c.name || 'Untitled', issuer: c.issuer || ''
         }));
-        saveCertifications();
+        saveMasterCertifications();
+        rebuildCertsFromTemplate();
       } else if (section === 'templates') {
         if (!Array.isArray(data)) throw new Error('not an array');
         templates = data.map(t => ({
@@ -1117,6 +1280,9 @@ function importSection(event, section) {
           data: t.data || {}
         }));
         if (!templates.find(t => t.id === activeTemplateId)) activeTemplateId = templates[0] ? templates[0].id : null;
+        migrateLegacyTemplates();
+        rebuildProjectsFromTemplate();
+        rebuildCertsFromTemplate();
         saveTemplates(); saveActiveTemplateId();
       } else {
         if (!Array.isArray(data)) throw new Error('not an array');
@@ -1138,8 +1304,8 @@ function exportAll() {
     profile: profileText,
     education: genericStores.education,
     experience: genericStores.experience,
-    projects: projects,
-    certifications: certifications,
+    projects: masterProjects,
+    certifications: masterCertifications,
     skills: genericStores.skills,
     associations: genericStores.associations,
     languages: genericStores.languages,
@@ -1155,12 +1321,17 @@ function importAll(event) {
     try {
       const data = JSON.parse(reader.result);
       if (typeof data.profile === 'string') { profileText = data.profile; saveProfileData(); }
-      if (Array.isArray(data.projects)) { projects = data.projects; saveProjects(); }
-      if (Array.isArray(data.certifications)) { certifications = data.certifications; saveCertifications(); }
+      if (Array.isArray(data.projects)) { masterProjects = data.projects; saveMasterProjects(); }
+      if (Array.isArray(data.certifications)) { masterCertifications = data.certifications; saveMasterCertifications(); }
       if (Array.isArray(data.templates)) { templates = data.templates; saveTemplates(); }
       for (const key of ['education','experience','skills','associations','languages']) {
         if (Array.isArray(data[key])) { genericStores[key] = data[key]; saveGenericStore(key); }
       }
+      if (!templates.find(t => t.id === activeTemplateId)) activeTemplateId = templates[0] ? templates[0].id : null;
+      migrateLegacyTemplates();
+      rebuildProjectsFromTemplate();
+      rebuildCertsFromTemplate();
+      saveActiveTemplateId();
       renderAll();
       setStatus('Everything imported.');
     } catch (e) {
@@ -1174,8 +1345,8 @@ function importAll(event) {
 function resetAllToDefaults() {
   if (!confirm('Reset ALL sections (profile, education, experience, projects, certifications, skills, associations, languages, templates) to their original defaults? All your edits will be lost.')) return;
   profileText = DEFAULT_PROFILE; saveProfileData();
-  projects = JSON.parse(JSON.stringify(DEFAULT_PROJECTS)); saveProjects();
-  certifications = JSON.parse(JSON.stringify(DEFAULT_CERTIFICATIONS)); saveCertifications();
+  masterProjects = JSON.parse(JSON.stringify(DEFAULT_MASTER_PROJECTS)); saveMasterProjects();
+  masterCertifications = JSON.parse(JSON.stringify(DEFAULT_MASTER_CERTIFICATIONS)); saveMasterCertifications();
   genericStores.education = JSON.parse(JSON.stringify(DEFAULT_EDUCATION)); saveGenericStore('education');
   genericStores.experience = JSON.parse(JSON.stringify(DEFAULT_EXPERIENCE)); saveGenericStore('experience');
   genericStores.skills = JSON.parse(JSON.stringify(DEFAULT_SKILLS)); saveGenericStore('skills');
@@ -1183,6 +1354,8 @@ function resetAllToDefaults() {
   genericStores.languages = JSON.parse(JSON.stringify(DEFAULT_LANGUAGES)); saveGenericStore('languages');
   templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES)); saveTemplates();
   activeTemplateId = templates[0] ? templates[0].id : null; saveActiveTemplateId();
+  rebuildProjectsFromTemplate();
+  rebuildCertsFromTemplate();
   renderAll();
   setStatus('Everything reset to defaults.');
 }
