@@ -154,16 +154,16 @@ details.coll .coll-body { padding-top: 8px; }
   box-shadow: 0 2px 28px rgba(0,0,0,0.13);
 }
 
-header { position: relative; padding-bottom: 4px; padding-right: 190px; margin-bottom: 0; min-height: 88px; }
-header .contact { position: absolute; top: auto; bottom: 2px; right: 0; width: 180px; }
+header { padding-bottom: 4px; margin-bottom: 0; }
 
 .name { font-family: var(--serif); font-size: 24pt; font-weight: 500; letter-spacing: -0.5px; line-height: 1; color: var(--ink); }
 .tagline { font-size: 8.5pt; font-weight: 400; color: var(--muted); margin-top: 3px; letter-spacing: 0.02em; }
 
-.contact { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
-.contact a, .contact span { display: inline-flex; align-items: center; gap: 5px; font-size: 8.5pt; color: var(--soft); text-decoration: none; line-height: 1.35; }
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 4px; }
+.contact a, .contact span:not(.sep) { display: inline-flex; align-items: center; gap: 4px; font-size: 8.5pt; color: var(--soft); text-decoration: none; line-height: 1.35; }
 .contact a:hover { color: var(--ink); text-decoration: underline; }
 .contact svg { width: 9px; height: 9px; fill: var(--soft); flex-shrink: 0; }
+.contact .sep { color: var(--line); font-size: 8pt; }
 
 section { margin-top: 4px; }
 .sec-title {
@@ -176,8 +176,8 @@ section { margin-top: 4px; }
 
 .entry { margin-bottom: 2px; }
 
-.entry-row { position: relative; padding-right: 260px; line-height: 1.25; min-height: 13px; }
-.entry-row .ent-right { position: absolute; top: 0; right: 0; text-align: right; }
+.entry-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; line-height: 1.25; min-height: 13px; }
+.entry-row .ent-right { text-align: right; white-space: nowrap; flex-shrink: 0; }
 
 .ent-title { font-family: var(--serif); font-size: 10.5pt; font-weight: 600; color: var(--ink); letter-spacing: -0.1px; }
 .ent-title .plinks { display: inline-flex; gap: 5px; margin-left: 6px; vertical-align: middle; }
@@ -188,12 +188,12 @@ section { margin-top: 4px; }
 .ent-right { font-size: 9pt; font-weight: 500; color: var(--soft); white-space: nowrap; font-feature-settings: "tnum"; }
 .ent-right b { font-weight: 600; color: var(--ink); }
 
-.ent-sub { position: relative; padding-right: 120px; font-size: 9pt; color: var(--muted); font-style: italic; margin-bottom: 1px; min-height: 12px; }
-.ent-sub .right { position: absolute; top: 0; right: 0; text-align: right; font-style: normal; font-feature-settings: "tnum"; }
+.ent-sub { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 9pt; color: var(--muted); font-style: italic; margin-bottom: 1px; min-height: 12px; }
+.ent-sub .right { text-align: right; white-space: nowrap; flex-shrink: 0; font-style: normal; font-feature-settings: "tnum"; }
 
-.bullets { list-style: none; margin: 1px 0 0 0; padding: 0 0 0 8px; border-left: 0.5px solid var(--line); }
-.bullets li { font-size: 9pt; line-height: 1.25; color: var(--soft); padding-left: 10px; position: relative; margin-bottom: 0; }
-.bullets li::before { content: '•'; position: absolute; left: 0; top: 0; color: var(--ink); font-size: 10pt; line-height: 1.25; }
+.bullets { margin: 1px 0 0 0; padding: 0 0 0 8px; border-left: 0.5px solid var(--line); }
+.bullets li { font-size: 9pt; line-height: 1.25; color: var(--soft); margin: 0 0 0 18px; list-style-type: disc; list-style-position: outside; }
+.bullets li::marker { color: var(--ink); font-size: 10pt; }
 
 .tech { font-size: 8.5pt; color: var(--muted); margin-top: 1px; padding-left: 18px; font-style: italic; }
 .tech b { font-weight: 600; font-style: normal; color: var(--ink); }
@@ -209,8 +209,8 @@ section { margin-top: 4px; }
 .bottom-row .sec-title { margin-bottom: 2px; }
 
 .mini-list { list-style: none; padding: 0; margin: 0; }
-.mini-list li { position: relative; font-size: 9pt; color: var(--soft); padding-right: 90px; line-height: 1.4; min-height: 12px; }
-.mini-list .mval { position: absolute; top: 0; right: 0; text-align: right; }
+.mini-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 9pt; color: var(--soft); line-height: 1.4; min-height: 12px; }
+.mini-list .mval { text-align: right; white-space: nowrap; flex-shrink: 0; }
 .mini-list .mkey { color: var(--ink); font-weight: 500; }
 .mini-list .mval { color: var(--muted); font-size: 8.5pt; font-style: italic; }
 
@@ -405,27 +405,29 @@ section { margin-top: 4px; }
     <div class="page" id="resumePage">
 
       <header>
-        <div class="name-block">
-          <div class="name">Firas Ridene</div>
-          <div class="tagline">AI Engineer &nbsp;·&nbsp; Generative AI &amp; Multi-Agent Systems &nbsp;·&nbsp; Tunis, Tunisia</div>
-        </div>
+        <div class="name">Firas Ridene</div>
+        <div class="tagline">AI Engineer &nbsp;·&nbsp; Generative AI &amp; Multi-Agent Systems &nbsp;·&nbsp; Tunis, Tunisia</div>
         <div class="contact">
           <a href="mailto:firas.ridene@outlook.com">
             <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
             firas.ridene@outlook.com
           </a>
+          <span class="sep">|</span>
           <span>
             <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.47 11.47 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
             +216 92 213 106
           </span>
+          <span class="sep">|</span>
           <a href="https://github.com/RideneFiras" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
             github.com/RideneFiras
           </a>
+          <span class="sep">|</span>
           <a href="https://www.linkedin.com/in/firas-ridene/" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M20.447 20.452H16.89v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a1.98 1.98 0 110-3.96 1.98 1.98 0 010 3.96zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             linkedin.com/in/firas-ridene
           </a>
+          <span class="sep">|</span>
           <a href="https://firasridene.tech/" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.93 9h-3.05a15.85 15.85 0 00-1.32-5.36A8.03 8.03 0 0119.93 11zM12 4.06c.83 1.2 1.98 3.25 2.28 6.94H9.72c.3-3.69 1.45-5.74 2.28-6.94zM9.72 13h4.56c-.3 3.69-1.45 5.74-2.28 6.94-.83-1.2-1.98-3.25-2.28-6.94zM8.44 5.64A15.85 15.85 0 007.12 11H4.07a8.03 8.03 0 014.37-5.36zM4.07 13h3.05a15.85 15.85 0 001.32 5.36A8.03 8.03 0 014.07 13zm11.49 5.36A15.85 15.85 0 0016.88 13h3.05a8.03 8.03 0 01-4.37 5.36z"/></svg>
             firasridene.tech
