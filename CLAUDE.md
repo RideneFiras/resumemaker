@@ -76,8 +76,15 @@ constants in the `<script>` are the actual source of truth for first load.
 
 **Print/PDF** — the `@media print` block hides `.dash`/`.no-print` and reflows `.preview-wrap` /
 `.page` to fill the page; `window.print()` (bound to the "Print / Save as PDF" button) is how a
-final resume gets produced. Layout is deliberately single-column with absolute-positioned date/
-location columns instead of grid/flexbox, to stay robust across PDF/ATS text parsers.
+final resume gets produced. Layout is deliberately single-column and avoids `position:
+relative`/`absolute` entirely — right-aligned dates/locations use flexbox `space-between`, bullet
+markers use `::marker`. This isn't a style preference: Chromium's PDF text export writes
+positioned elements *after* all normal-flow content in their stacking context, so anything
+absolutely positioned (the old right-aligned date columns, the old header contact column) got
+scrambled to the end of the extracted text, detached from its job title/section — verified via
+headless print-to-PDF + text extraction. Don't reintroduce `position: relative`/`absolute` in the
+resume/preview output for layout purposes; it silently breaks ATS text parsing even though it
+looks fine on screen and in the rendered PDF.
 
 ## Repo layout notes
 
