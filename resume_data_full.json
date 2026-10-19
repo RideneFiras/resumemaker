@@ -1,0 +1,944 @@
+{
+  "profile": "AI Engineer combining experience in generative AI, multi-agent systems, and workflow automation with client-facing solution design. Skilled in identifying process improvements, translating business needs into practical solutions, and explaining technical trade-offs to non-technical stakeholders.",
+  "education": [
+    {
+      "id": "edu1",
+      "institution": "Esprit: School of Engineering",
+      "location": "Tunis, Tunisia",
+      "degree": "Engineering Degree in Computer Science",
+      "dateRange": "2023 – 2026"
+    },
+    {
+      "id": "edu2",
+      "institution": "Integrated Preparatory Cycle",
+      "location": "Esprit Tunis",
+      "degree": "Mathematics & Physics",
+      "dateRange": "2020 – 2023"
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp1",
+      "title": "AI & Software Engineer",
+      "companyLine": "Freelance / Self-Employed",
+      "dateRange": "May 2026 - Present",
+      "bullets": [
+        "Delivered AI and full-stack solutions across marketing, sales, finance, and insurance.",
+        "Worked with clients to identify process improvements and translate business needs into technical solutions.",
+        "Managed projects end-to-end, from requirements gathering and development to deployment."
+      ],
+      "techStack": "Python, FastAPI, Next.js, TypeScript, PostgreSQL, Anthropic Claude, QStash, Unipile, Stripe, Railway, Vercel, n8n, latenode, CrewAI"
+    },
+    {
+      "id": "exp3",
+      "title": "End-of-studies Project - Vocaflow",
+      "companyLine": "Agile4ux",
+      "dateRange": "2026",
+      "bullets": [
+        "Designed a multi-tenant platform where users build and deploy AI voice agents across phone, chat, and WhatsApp.",
+        "Built real-time voice agents with knowledge retrieval, data collection, and human handoff at sub-second latency.",
+        "Enabled 24/7 customer engagement for inquiries, bookings, and support without added headcount."
+      ],
+      "techStack": "React, FastAPI, Supabase, OpenAI Realtime API, Twilio, Stripe, Redis, Docker, Azure"
+    },
+    {
+      "id": "exp2",
+      "title": "AI Automation Intern",
+      "companyLine": "Agile4ux",
+      "dateRange": "2025",
+      "bullets": [
+        "Analyzed marketing and sales processes to identify repetitive tasks and automation opportunities.",
+        "Designed a multi-agent system to research, qualify, and analyze prospects, generating strategic reports.",
+        "Reduced manual prospecting time by ~80% and automated report delivery and CRM integration."
+      ],
+      "techStack": "Python, FastAPI, OpenAI, CrewAI, Latenode, Presenton"
+    }
+  ],
+  "projects": [
+    {
+      "id": "vocaflow",
+      "title": "VocaFlow — Voice AI Agent SaaS Platform",
+      "github": "",
+      "youtube": "",
+      "bullets": [
+        "Designed a multi-tenant platform where users build and deploy AI voice agents across phone, chat, and WhatsApp.",
+        "Built real-time voice agents with knowledge retrieval, data collection, and human handoff at sub-second latency.",
+        "Enabled businesses to offer 24/7 customer engagement without added headcount, handling inquiries, bookings, and support."
+      ],
+      "techStack": "React, FastAPI, Supabase, OpenAI Realtime API, Twilio, Stripe, Redis, Docker, Azure"
+    },
+    {
+      "id": "airline-assistant",
+      "title": "AI Assistant — Airline Customer Service (GenAI Capstone Kaggle × Google)",
+      "github": "https://github.com/RideneFiras/KagglexGoogle",
+      "youtube": "",
+      "bullets": [
+        "Designed a conversational assistant that collects customer information through structured dialogue.",
+        "Reduced repetitive customer support tasks by automating the handling of frequent inquiries.",
+        "Integrated an intelligent search engine to provide contextualized responses from a dedicated knowledge base."
+      ],
+      "techStack": "Python, LangChain, ChromaDB, RAG, Gradio, Gemini"
+    },
+    {
+      "id": "content-automation",
+      "title": "Content Creation Automation Platform",
+      "github": "",
+      "youtube": "",
+      "bullets": [
+        "Built a platform automating research, generation, and publication of Facebook content across objectives.",
+        "Orchestrated specialized agents per source (news, websites, documents) with email validation before publishing.",
+        "Implemented automated comment moderation and intelligent responses based on a knowledge base."
+      ],
+      "techStack": "Python, n8n, MCP, Meta Developer, Tavily, ChromaDB"
+    },
+    {
+      "id": "claude-code-team",
+      "title": "8-Agent Claude Code Development Team",
+      "github": "",
+      "youtube": "",
+      "bullets": [
+        "Built a team of 8 specialized Claude Code agents (PM, Frontend, Backend, AI, DevOps, QA, Test, Docs) coordinated through Notion and GitHub.",
+        "Ran full sprint workflows solo, from backlog planning to PR review and merge.",
+        "Shipped 170+ GitHub issues and 726 automated tests across a ~40,000 line codebase in about 4 weeks."
+      ],
+      "techStack": "Claude Code, Notion MCP, GitHub CLI, Playwright MCP"
+    },
+    {
+      "id": "recruitment-automation",
+      "title": "Recruitment Automation System",
+      "github": "",
+      "youtube": "",
+      "bullets": [
+        "Built four interconnected pipelines covering candidate intake, AI scoring, ATS synchronization, and lead generation.",
+        "Scored candidates against job requirements using weighted signals, generating clear reasoning behind every shortlist decision and triggering automated shortlist emails and Telegram alerts.",
+        "Synced candidate data automatically across the ATS, kanban board, and public job board, keeping every system up to date in real time."
+      ],
+      "techStack": "n8n, Make, REST APIs, Webhooks, Telegram, Notion"
+    },
+    {
+      "id": "prospecting-system",
+      "title": "Multi-Agent AI Prospecting System",
+      "github": "",
+      "youtube": "",
+      "bullets": [
+        "Designed a multi-agent system to research, qualify, and analyze prospects, generating strategic reports.",
+        "Built specialized agents for opportunity analysis, competitor research, and personalized outreach generation.",
+        "Reduced manual prospecting time by ~80% and automated report delivery and CRM integration."
+      ],
+      "techStack": "CrewAI, LangChain, FastAPI, Latenode"
+    },
+    {
+      "id": "pedagogia",
+      "title": "Pedagog'IA — AI Platform for Teachers",
+      "github": "https://github.com/RideneFiras/PedagogIA",
+      "youtube": "",
+      "bullets": [
+        "Built a social platform for Tunisian teachers to share resources, combined with an AI feature generating fiches, quizzes, and exercises.",
+        "Implemented an AI credits system, admin panel, and full social feed feature set.",
+        "Designed the AI generation flow around subject, level, and chapter inputs for fast lesson prep."
+      ],
+      "techStack": "Next.js, FastAPI, Supabase, pgvector, GitHub Models (gpt-4o-mini)"
+    },
+    {
+      "id": "5g-throughput",
+      "title": "5G Throughput Prediction (MLOps)",
+      "github": "https://github.com/RideneFiras/QosMLOPS",
+      "youtube": "",
+      "bullets": [
+        "Built a full MLOps pipeline predicting 5G network throughput, comparing 300+ models via Azure ML.",
+        "Added explainability with SHAP and GPT-4o to make model decisions interpretable for non-technical stakeholders.",
+        "Deployed the pipeline in Docker with monitoring through Elasticsearch and Kibana."
+      ],
+      "techStack": "Azure ML, FastAPI, Docker, Elasticsearch, Kibana, SHAP, MLflow, GitHub Actions"
+    },
+    {
+      "id": "anomaly-detection",
+      "title": "AI Anomaly Detection for Industrial Screws",
+      "github": "https://github.com/RideneFiras/Anomaly_detection",
+      "youtube": "",
+      "bullets": [
+        "Built a CNN autoencoder trained only on defect-free images to flag visual defects through reconstruction error.",
+        "Delivered real-time inspection with confidence scoring for production line use.",
+        "Reduced manual inspection time by 70%."
+      ],
+      "techStack": "TensorFlow, FastAPI, OpenCV, TailwindCSS"
+    },
+    {
+      "id": "tt-assistant",
+      "title": "TT Assistant — Multilingual Chatbot (CSR Hackathon)",
+      "github": "https://github.com/RideneFiras/ChatbotTT",
+      "youtube": "",
+      "bullets": [
+        "Built an inclusive multilingual chatbot for Tunisie Telecom supporting Arabic, French, English, and Tunisian dialect.",
+        "Enabled both voice and text interaction using Whisper for speech and GPT-4o for responses.",
+        "Won 3rd place at the AI for CSR Hackathon."
+      ],
+      "techStack": "GPT-4o, Whisper, LangChain, FastAPI, n8n, Telegram"
+    },
+    {
+      "id": "odoo-integrations",
+      "title": "Odoo Integrations",
+      "github": "",
+      "youtube": "",
+      "bullets": [
+        "Integrated Odoo CRM into a multi-agent AI prospecting system for automated lead and pipeline updates.",
+        "Built a facial recognition attendance system integrated with Odoo's attendance module."
+      ],
+      "techStack": "Odoo, Python, OpenCV"
+    },
+    {
+      "id": "proj_1789228008159",
+      "title": "Insurance Market Intelligence Platform",
+      "bullets": [
+        "Built a platform automating insurer and MGA research to support investment screening and due diligence.",
+        "Reduced manual due diligence time by ~70% through automated data collection and structuring.",
+        "Improved data accuracy and consistency across the research pipeline for investment analysis."
+      ],
+      "techStack": "Python, TypeScript, BeautifulSoup, Anthropic API, Perplexity, Tavily",
+      "github": "",
+      "youtube": ""
+    },
+    {
+      "id": "proj_1789228287567",
+      "title": "Personal Finance Planning App (iOS)",
+      "bullets": [
+        "Contributed to an app that reads a user's bank statement and automatically calculates income, expenses, and savings capacity.",
+        "Worked on the savings plan and investment tracking features, plus a public simulator comparing savings strategies with historical data.",
+        "Prepared the app for App Store publication, handling GDPR compliance including data minimization, EU-hosted storage, and database-level isolation per household."
+      ],
+      "techStack": "",
+      "github": "",
+      "youtube": ""
+    }
+  ],
+  "certifications": [
+    {
+      "id": "cert1",
+      "name": "AI Security & GenAI Red Teaming",
+      "issuer": "ESPRIT"
+    },
+    {
+      "id": "cert2",
+      "name": "Attendance Hashgraph Developer",
+      "issuer": "Hedera"
+    },
+    {
+      "id": "cert3",
+      "name": "AWS Academy Graduate — Cloud Foundations",
+      "issuer": "Amazon Web Services (AWS)"
+    },
+    {
+      "id": "cert4",
+      "name": "Applications of AI for Anomaly Detection",
+      "issuer": "NVIDIA"
+    },
+    {
+      "id": "cert5",
+      "name": "Building Generative AI-Powered Applications with Python",
+      "issuer": "IBM"
+    },
+    {
+      "id": "cert6",
+      "name": "Multi AI Agent Systems with crewAI",
+      "issuer": "CrewAI"
+    },
+    {
+      "id": "cert7",
+      "name": "Microsoft Azure AI Essentials Professional Certificate",
+      "issuer": "Microsoft"
+    },
+    {
+      "id": "cert8",
+      "name": "Building AI Agents with Multimodal Models",
+      "issuer": "NVIDIA"
+    },
+    {
+      "id": "cert9",
+      "name": "Generative AI with Diffusion Models",
+      "issuer": "NVIDIA"
+    },
+    {
+      "id": "cert10",
+      "name": "Machine Learning in Production",
+      "issuer": "DeepLearning.AI"
+    },
+    {
+      "id": "cert11",
+      "name": "Building LLM Applications With Prompt Engineering",
+      "issuer": "NVIDIA"
+    },
+    {
+      "id": "cert12",
+      "name": "Introduction to Transformer-Based Natural Language Processing",
+      "issuer": "NVIDIA"
+    },
+    {
+      "id": "cert13",
+      "name": "5-Day Gen AI Intensive",
+      "issuer": "Kaggle"
+    },
+    {
+      "id": "cert14",
+      "name": "Building RAG Agents with LLMs",
+      "issuer": "NVIDIA"
+    },
+    {
+      "id": "cert15",
+      "name": "Machine Learning Explainability",
+      "issuer": "Kaggle"
+    },
+    {
+      "id": "cert16",
+      "name": "Fundamentals of Deep Learning",
+      "issuer": "NVIDIA"
+    },
+    {
+      "id": "cert17",
+      "name": "GitHub Foundations",
+      "issuer": "GitHub"
+    },
+    {
+      "id": "cert18",
+      "name": "CCNA: Switching, Routing, and Wireless Essentials",
+      "issuer": "Cisco"
+    },
+    {
+      "id": "cert19",
+      "name": "Hands-on with Explainable AI Tools & Techniques",
+      "issuer": "ESPRIT"
+    },
+    {
+      "id": "cert20",
+      "name": "Artificial Intelligence Fundamentals with Capstone Project",
+      "issuer": "IBM"
+    },
+    {
+      "id": "cert21",
+      "name": "Agentic AI for Enterprise",
+      "issuer": "ESPRIT"
+    },
+    {
+      "id": "cert22",
+      "name": "Data Engineering & MLOps",
+      "issuer": "ESPRIT"
+    }
+  ],
+  "skills": [
+    {
+      "id": "sk1",
+      "category": "Generative AI & Agents",
+      "items": "LLMs, RAG, LangChain, CrewAI, MCP, Claude Code, Transformers"
+    },
+    {
+      "id": "sk2",
+      "category": "ML & MLOps",
+      "items": "PyTorch, TensorFlow, Scikit-learn, MLflow, Azure ML Studio, SHAP, GitHub Actions"
+    },
+    {
+      "id": "sk3",
+      "category": "Development & Data",
+      "items": "Python, JS (Node.js), Java (Spring Boot), FastAPI, REST APIs, Pandas, SQL, NoSQL"
+    },
+    {
+      "id": "sk4",
+      "category": "Infra & Automation",
+      "items": "Docker, Render, Git/GitHub, Elasticsearch, Kibana, n8n, Latenode"
+    }
+  ],
+  "associations": [
+    {
+      "id": "as1",
+      "name": "JCI Kelibia",
+      "role": "Member"
+    },
+    {
+      "id": "as2",
+      "name": "Tunisian Scouts",
+      "role": "Scout Leader"
+    }
+  ],
+  "languages": [
+    {
+      "id": "la1",
+      "name": "Arabic",
+      "level": "Native"
+    },
+    {
+      "id": "la2",
+      "name": "English",
+      "level": "Fluent"
+    },
+    {
+      "id": "la3",
+      "name": "French",
+      "level": "Fluent"
+    }
+  ],
+  "templates": [
+    {
+      "id": "default",
+      "name": "Default",
+      "data": {
+        "profile": "AI Engineer specialized in generative AI and multi-agent systems, designing intelligent assistants and automation systems that reduce manual tasks and improve decision-making. I continuously explore new tools and frameworks to build the right stack per use case, always prioritizing the most relevant solution over a familiar one.",
+        "education": [
+          {
+            "id": "edu1",
+            "institution": "Esprit: School of Engineering",
+            "location": "Tunis, Tunisia",
+            "degree": "Engineering Degree in Computer Science",
+            "dateRange": "2023 – Present"
+          },
+          {
+            "id": "edu2",
+            "institution": "Integrated Preparatory Cycle",
+            "location": "Esprit Tunis",
+            "degree": "Mathematics & Physics",
+            "dateRange": "2020 – 2023"
+          }
+        ],
+        "experience": [
+          {
+            "id": "exp1",
+            "title": "Freelance Software Engineer",
+            "companyLine": "B2B SaaS Startup, Paris &nbsp;·&nbsp; Remote",
+            "dateRange": "Mar 2026 – Present",
+            "bullets": [
+              "Contributing to a multi-tenant AI sales outreach platform, shipping backend, AI, and frontend features end-to-end.",
+              "Built an AI agent system that autonomously qualifies prospects and generates personalized outreach at scale.",
+              "Handling deployments and stabilizing the production pipeline by fixing scoring, enrichment, and webhook issues."
+            ],
+            "techStack": "Python, FastAPI, Next.js, TypeScript, PostgreSQL, Anthropic Claude, QStash, Unipile, Stripe, Railway, Vercel"
+          },
+          {
+            "id": "exp2",
+            "title": "AI Automation Intern",
+            "companyLine": "Agile4ux",
+            "dateRange": "2025",
+            "bullets": [
+              "Analyzed marketing and sales processes to identify repetitive tasks and automation opportunities.",
+              "Designed a multi-agent system to research, qualify, and analyze prospects, generating strategic reports.",
+              "Reduced manual prospecting time by ~80% and automated report delivery and CRM integration."
+            ],
+            "techStack": "Python, FastAPI, OpenAI, CrewAI, Latenode, Presenton"
+          },
+          {
+            "id": "exp3",
+            "title": "Data Platform Development Intern",
+            "companyLine": "Designet",
+            "dateRange": "2024",
+            "bullets": [
+              "Built a platform that generates leads from Google Maps with filterable criteria and CSV export.",
+              "Reduced research time and improved prospect quality through automated extraction and filtering."
+            ],
+            "techStack": "Google Maps API, SerperAPI, FastAPI, Next.js, Docker"
+          }
+        ],
+        "skills": [
+          {
+            "id": "sk1",
+            "category": "Generative AI & Agents",
+            "items": "LLMs, RAG, LangChain, CrewAI, MCP, Claude Code, Transformers"
+          },
+          {
+            "id": "sk2",
+            "category": "ML & MLOps",
+            "items": "PyTorch, TensorFlow, Scikit-learn, MLflow, Azure ML Studio, SHAP, GitHub Actions"
+          },
+          {
+            "id": "sk3",
+            "category": "Development & Data",
+            "items": "Python, JS (Node.js), Java (Spring Boot), FastAPI, REST APIs, Pandas, SQL, NoSQL"
+          },
+          {
+            "id": "sk4",
+            "category": "Infra & Automation",
+            "items": "Docker, Render, Git/GitHub, Elasticsearch, Kibana, n8n, Latenode"
+          }
+        ],
+        "associations": [
+          {
+            "id": "as1",
+            "name": "JCI Kelibia",
+            "role": "Member"
+          },
+          {
+            "id": "as2",
+            "name": "Tunisian Scouts",
+            "role": "Scout Leader"
+          }
+        ],
+        "languages": [
+          {
+            "id": "la1",
+            "name": "Arabic",
+            "level": "Native"
+          },
+          {
+            "id": "la2",
+            "name": "English",
+            "level": "Fluent"
+          },
+          {
+            "id": "la3",
+            "name": "French",
+            "level": "Fluent"
+          }
+        ],
+        "projectOrder": [
+          "vocaflow",
+          "airline-assistant",
+          "content-automation",
+          "claude-code-team",
+          "recruitment-automation",
+          "prospecting-system",
+          "pedagogia",
+          "5g-throughput",
+          "anomaly-detection",
+          "tt-assistant",
+          "odoo-integrations"
+        ],
+        "projectSelection": {
+          "vocaflow": true,
+          "airline-assistant": true,
+          "content-automation": true,
+          "claude-code-team": false,
+          "recruitment-automation": false,
+          "prospecting-system": false,
+          "pedagogia": false,
+          "5g-throughput": false,
+          "anomaly-detection": false,
+          "tt-assistant": false,
+          "odoo-integrations": false
+        },
+        "certOrder": [
+          "cert1",
+          "cert2",
+          "cert3",
+          "cert4",
+          "cert5",
+          "cert6",
+          "cert7",
+          "cert8",
+          "cert9",
+          "cert10",
+          "cert11",
+          "cert12",
+          "cert13",
+          "cert14",
+          "cert15",
+          "cert16",
+          "cert17",
+          "cert18",
+          "cert19",
+          "cert20",
+          "cert21",
+          "cert22"
+        ],
+        "certSelection": {
+          "cert1": false,
+          "cert2": false,
+          "cert3": false,
+          "cert4": false,
+          "cert5": false,
+          "cert6": false,
+          "cert7": false,
+          "cert8": false,
+          "cert9": false,
+          "cert10": false,
+          "cert11": false,
+          "cert12": false,
+          "cert13": false,
+          "cert14": false,
+          "cert15": false,
+          "cert16": false,
+          "cert17": false,
+          "cert18": false,
+          "cert19": false,
+          "cert20": false,
+          "cert21": false,
+          "cert22": false
+        }
+      }
+    },
+    {
+      "id": "tmpl_1792359252690",
+      "name": "FREELANCEWORK",
+      "data": {
+        "profile": "AI Engineer combining hands-on experience in generative AI, multi-agent systems, and workflow automation with client-facing solution design. Experienced in identifying business process improvements, translating requirements into practical solutions, and explaining technical trade-offs to non-technical stakeholders. Focused on building AI systems that deliver measurable business value.",
+        "education": [
+          {
+            "id": "edu1",
+            "institution": "Esprit: School of Engineering",
+            "location": "Tunis, Tunisia",
+            "degree": "Engineering Degree in Computer Science",
+            "dateRange": "2023 – Present"
+          },
+          {
+            "id": "edu2",
+            "institution": "Integrated Preparatory Cycle",
+            "location": "Esprit Tunis",
+            "degree": "Mathematics & Physics",
+            "dateRange": "2020 – 2023"
+          }
+        ],
+        "experience": [
+          {
+            "id": "exp1",
+            "title": "AI & Software Engineer",
+            "companyLine": "Freelance / Self-Employed",
+            "dateRange": "Mai 2026 - Present",
+            "bullets": [
+              "Delivered AI automation and fullstack solutions for clients across marketing, sales, finance, and insurance sectors.",
+              "Translated business needs into technical solutions, working directly with non-technical stakeholders and explaining AI systems in plain terms.",
+              "Owned projects end-to-end in full autonomy, from specification through development and deployment."
+            ],
+            "techStack": "Python, FastAPI, Next.js, TypeScript, PostgreSQL, Anthropic Claude, QStash, Unipile, Stripe, Railway, Vercel, n8n, latenode, CrewAI"
+          },
+          {
+            "id": "exp3",
+            "title": "End-of-studies Project - Vocaflow",
+            "companyLine": "Agile4ux",
+            "dateRange": "2026",
+            "bullets": [
+              "Designed a multi-tenant platform where users build and deploy AI voice agents across phone, chat, and WhatsApp.",
+              "Built real-time voice agents with knowledge retrieval, data collection, and human handoff at sub-second latency.",
+              "Enabled businesses to offer 24/7 customer engagement without added headcount, handling inquiries, bookings, and support."
+            ],
+            "techStack": "React, FastAPI, Supabase, OpenAI Realtime API, Twilio, Stripe, Redis, Docker, Azure"
+          },
+          {
+            "id": "exp2",
+            "title": "AI Automation Intern",
+            "companyLine": "Agile4ux",
+            "dateRange": "2025",
+            "bullets": [
+              "Analyzed marketing and sales processes to identify repetitive tasks and automation opportunities.",
+              "Designed a multi-agent system to research, qualify, and analyze prospects, generating strategic reports.",
+              "Reduced manual prospecting time by ~80% and automated report delivery and CRM integration."
+            ],
+            "techStack": "Python, FastAPI, OpenAI, CrewAI, Latenode, Presenton"
+          }
+        ],
+        "skills": [
+          {
+            "id": "sk1",
+            "category": "Generative AI & Agents",
+            "items": "LLMs, RAG, LangChain, CrewAI, MCP, Claude Code, Transformers"
+          },
+          {
+            "id": "sk2",
+            "category": "ML & MLOps",
+            "items": "PyTorch, TensorFlow, Scikit-learn, MLflow, Azure ML Studio, SHAP, GitHub Actions"
+          },
+          {
+            "id": "sk3",
+            "category": "Development & Data",
+            "items": "Python, JS (Node.js), Java (Spring Boot), FastAPI, REST APIs, Pandas, SQL, NoSQL"
+          },
+          {
+            "id": "sk4",
+            "category": "Infra & Automation",
+            "items": "Docker, Render, Git/GitHub, Elasticsearch, Kibana, n8n, Latenode"
+          }
+        ],
+        "associations": [
+          {
+            "id": "as1",
+            "name": "JCI Kelibia",
+            "role": "Member"
+          },
+          {
+            "id": "as2",
+            "name": "Tunisian Scouts",
+            "role": "Scout Leader"
+          }
+        ],
+        "languages": [
+          {
+            "id": "la1",
+            "name": "Arabic",
+            "level": "Native"
+          },
+          {
+            "id": "la2",
+            "name": "English",
+            "level": "Fluent"
+          },
+          {
+            "id": "la3",
+            "name": "French",
+            "level": "Fluent"
+          }
+        ],
+        "projectOrder": [
+          "vocaflow",
+          "5g-throughput",
+          "airline-assistant",
+          "content-automation",
+          "claude-code-team",
+          "recruitment-automation",
+          "prospecting-system",
+          "anomaly-detection",
+          "pedagogia",
+          "tt-assistant",
+          "odoo-integrations",
+          "proj_1789228008159",
+          "proj_1789228287567"
+        ],
+        "projectSelection": {
+          "vocaflow": false,
+          "5g-throughput": false,
+          "airline-assistant": false,
+          "content-automation": true,
+          "claude-code-team": false,
+          "recruitment-automation": true,
+          "prospecting-system": false,
+          "anomaly-detection": false,
+          "pedagogia": true,
+          "tt-assistant": false,
+          "odoo-integrations": false,
+          "proj_1789228008159": false,
+          "proj_1789228287567": false
+        },
+        "certOrder": [
+          "cert1",
+          "cert2",
+          "cert3",
+          "cert4",
+          "cert5",
+          "cert6",
+          "cert7",
+          "cert8",
+          "cert9",
+          "cert10",
+          "cert11",
+          "cert12",
+          "cert13",
+          "cert14",
+          "cert15",
+          "cert16",
+          "cert17",
+          "cert18",
+          "cert19",
+          "cert20",
+          "cert21",
+          "cert22"
+        ],
+        "certSelection": {
+          "cert1": false,
+          "cert2": false,
+          "cert3": false,
+          "cert4": false,
+          "cert5": false,
+          "cert6": false,
+          "cert7": false,
+          "cert8": false,
+          "cert9": false,
+          "cert10": false,
+          "cert11": false,
+          "cert12": false,
+          "cert13": false,
+          "cert14": false,
+          "cert15": false,
+          "cert16": false,
+          "cert17": false,
+          "cert18": false,
+          "cert19": false,
+          "cert20": false,
+          "cert21": false,
+          "cert22": false
+        }
+      }
+    },
+    {
+      "id": "tmpl_freelancework_latest",
+      "name": "FREELANCEWORK (latest edits)",
+      "data": {
+        "profile": "AI Engineer combining experience in generative AI, multi-agent systems, and workflow automation with client-facing solution design. Skilled in identifying process improvements, translating business needs into practical solutions, and explaining technical trade-offs to non-technical stakeholders.",
+        "education": [
+          {
+            "id": "edu1",
+            "institution": "Esprit: School of Engineering",
+            "location": "Tunis, Tunisia",
+            "degree": "Engineering Degree in Computer Science",
+            "dateRange": "2023 – 2026"
+          },
+          {
+            "id": "edu2",
+            "institution": "Integrated Preparatory Cycle",
+            "location": "Esprit Tunis",
+            "degree": "Mathematics & Physics",
+            "dateRange": "2020 – 2023"
+          }
+        ],
+        "experience": [
+          {
+            "id": "exp1",
+            "title": "AI & Software Engineer",
+            "companyLine": "Freelance / Self-Employed",
+            "dateRange": "May 2026 - Present",
+            "bullets": [
+              "Delivered AI and full-stack solutions across marketing, sales, finance, and insurance.",
+              "Worked with clients to identify process improvements and translate business needs into technical solutions.",
+              "Managed projects end-to-end, from requirements gathering and development to deployment."
+            ],
+            "techStack": "Python, FastAPI, Next.js, TypeScript, PostgreSQL, Anthropic Claude, QStash, Unipile, Stripe, Railway, Vercel, n8n, latenode, CrewAI"
+          },
+          {
+            "id": "exp3",
+            "title": "End-of-studies Project - Vocaflow",
+            "companyLine": "Agile4ux",
+            "dateRange": "2026",
+            "bullets": [
+              "Designed a multi-tenant platform where users build and deploy AI voice agents across phone, chat, and WhatsApp.",
+              "Built real-time voice agents with knowledge retrieval, data collection, and human handoff at sub-second latency.",
+              "Enabled 24/7 customer engagement for inquiries, bookings, and support without added headcount."
+            ],
+            "techStack": "React, FastAPI, Supabase, OpenAI Realtime API, Twilio, Stripe, Redis, Docker, Azure"
+          },
+          {
+            "id": "exp2",
+            "title": "AI Automation Intern",
+            "companyLine": "Agile4ux",
+            "dateRange": "2025",
+            "bullets": [
+              "Analyzed marketing and sales processes to identify repetitive tasks and automation opportunities.",
+              "Designed a multi-agent system to research, qualify, and analyze prospects, generating strategic reports.",
+              "Reduced manual prospecting time by ~80% and automated report delivery and CRM integration."
+            ],
+            "techStack": "Python, FastAPI, OpenAI, CrewAI, Latenode, Presenton"
+          }
+        ],
+        "skills": [
+          {
+            "id": "sk1",
+            "category": "Generative AI & Agents",
+            "items": "LLMs, RAG, LangChain, CrewAI, MCP, Claude Code, Transformers"
+          },
+          {
+            "id": "sk2",
+            "category": "ML & MLOps",
+            "items": "PyTorch, TensorFlow, Scikit-learn, MLflow, Azure ML Studio, SHAP, GitHub Actions"
+          },
+          {
+            "id": "sk3",
+            "category": "Development & Data",
+            "items": "Python, JS (Node.js), Java (Spring Boot), FastAPI, REST APIs, Pandas, SQL, NoSQL"
+          },
+          {
+            "id": "sk4",
+            "category": "Infra & Automation",
+            "items": "Docker, Render, Git/GitHub, Elasticsearch, Kibana, n8n, Latenode"
+          }
+        ],
+        "associations": [
+          {
+            "id": "as1",
+            "name": "JCI Kelibia",
+            "role": "Member"
+          },
+          {
+            "id": "as2",
+            "name": "Tunisian Scouts",
+            "role": "Scout Leader"
+          }
+        ],
+        "languages": [
+          {
+            "id": "la1",
+            "name": "Arabic",
+            "level": "Native"
+          },
+          {
+            "id": "la2",
+            "name": "English",
+            "level": "Fluent"
+          },
+          {
+            "id": "la3",
+            "name": "French",
+            "level": "Fluent"
+          }
+        ],
+        "projectOrder": [
+          "vocaflow",
+          "5g-throughput",
+          "airline-assistant",
+          "content-automation",
+          "claude-code-team",
+          "recruitment-automation",
+          "prospecting-system",
+          "anomaly-detection",
+          "pedagogia",
+          "tt-assistant",
+          "odoo-integrations",
+          "proj_1789228008159",
+          "proj_1789228287567"
+        ],
+        "projectSelection": {
+          "vocaflow": false,
+          "5g-throughput": false,
+          "airline-assistant": false,
+          "content-automation": true,
+          "claude-code-team": false,
+          "recruitment-automation": true,
+          "prospecting-system": false,
+          "anomaly-detection": false,
+          "pedagogia": true,
+          "tt-assistant": false,
+          "odoo-integrations": false,
+          "proj_1789228008159": false,
+          "proj_1789228287567": false
+        },
+        "certOrder": [
+          "cert1",
+          "cert2",
+          "cert3",
+          "cert4",
+          "cert5",
+          "cert6",
+          "cert7",
+          "cert8",
+          "cert9",
+          "cert10",
+          "cert11",
+          "cert12",
+          "cert13",
+          "cert14",
+          "cert15",
+          "cert16",
+          "cert17",
+          "cert18",
+          "cert19",
+          "cert20",
+          "cert21",
+          "cert22"
+        ],
+        "certSelection": {
+          "cert1": false,
+          "cert2": false,
+          "cert3": false,
+          "cert4": false,
+          "cert5": false,
+          "cert6": false,
+          "cert7": false,
+          "cert8": false,
+          "cert9": false,
+          "cert10": false,
+          "cert11": false,
+          "cert12": false,
+          "cert13": false,
+          "cert14": false,
+          "cert15": false,
+          "cert16": false,
+          "cert17": false,
+          "cert18": false,
+          "cert19": false,
+          "cert20": false,
+          "cert21": false,
+          "cert22": false
+        }
+      }
+    }
+  ]
+}
